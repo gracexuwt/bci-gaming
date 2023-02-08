@@ -1,4 +1,4 @@
-## Notion ticket link
+## ClickUp ticket link
 <!-- Please replace with your ticket's URL -->
 [Ticket Name](clickup ticket URL)
 
@@ -19,7 +19,7 @@
 
 
 ## Checklist
-- [x] My PR name is descriptive and in imperative tense
-- [x] My commit messages are descriptive and in imperative tense. My commits are atomic and trivial commits are squashed or fixup'd into non-trivial commits
-- [x] I have run the appropriate linter(s)
-- [x] I have requested a review from the PL, as well as other devs who have background knowledge on this PR or who will be building on top of this PR
+- [ ] My PR name is descriptive and in imperative tense
+- [ ] My commit messages are descriptive and in imperative tense. My commits are atomic and trivial commits are squashed or fixup'd into non-trivial commits
+- [ ] I have run the appropriate linter(s)
+- [ ] I have requested a review from the PL, as well as other devs who have background knowledge on this PR or who will be building on top of this PR
