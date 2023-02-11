@@ -4,7 +4,7 @@ BCI Gaming Team is very cool
 
 # Getting started
 
-Install requirements.
+Install the required python packages for this project.
 
 `pip install -r requirements.txt`
 
