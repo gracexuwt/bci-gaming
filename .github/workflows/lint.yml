@@ -1,0 +1,33 @@
+name: Lint codebase
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "bci-work/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "bci-work/**"
+
+jobs:
+  run-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Filter changed files
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            python-bci-work:
+              - "bci-work/**"
+
+      - name: Lint python BCI work
+        if: steps.changes.outputs.bci-work == 'true'
+        working-directory: ./bci-work
+        run: pip install pylint ./bci-work
