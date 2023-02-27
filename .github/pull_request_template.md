@@ -19,7 +19,8 @@
 
 
 ## Checklist
-- [ ] My PR name is descriptive and in imperative tense
-- [ ] My commit messages are descriptive and in imperative tense. My commits are atomic and trivial commits are squashed or fixup'd into non-trivial commits
+- [ ] My PR name is descriptive
+- [ ] My commit messages are descriptive. My commits are atomic and trivial commits are squashed or fixup'd into non-trivial commits
 - [ ] I have run the appropriate linter(s)
 - [ ] I have requested a review from the PL, as well as other devs who have background knowledge on this PR or who will be building on top of this PR
+- [ ] My code is organized, and commented and documented so that another dev can understand what I did
