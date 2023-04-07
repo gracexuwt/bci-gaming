@@ -10,10 +10,11 @@ public class Character : MonoBehaviour
     public float jumpSpeed = 40f;
     public float jumpDuration = 0.75f; //seconds
 
-    private int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
+    public int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
     private bool midair = false;
     private float fallTime = 0; //tracks time spent in the air
     private float jumpTime = 0; //tracks time since last jump
+    private IDictionary<string, int> pastCollisions = new Dictionary<string, int>();
 
     // Start is called before the first frame update
     void Start()
@@ -66,33 +67,132 @@ public class Character : MonoBehaviour
 
     //collision work in progress
     void OnTriggerEnter(Collider other) {
-        Vector3 contact = other.ClosestPoint(transform.position) - transform.position;
-        // Debug.Log(contact);
+
+        //check collisions by examining each corner of character and other object
+        int collisionDirection = checkCollisionDirection(transform, other.gameObject.transform); //0 = top, 1 = bottom, 2 = right, 3 = left;
+        // Debug.Log(collisionDirection);
 
         //contact above, below, left, and right
-        if (contact.y >= 0.75f) movementBlocked[0] += 1;
-        else if (contact.y <= -0.75f) movementBlocked[1] += 1;
-        else if (contact.x >= 0.4f) movementBlocked[2] += 1;
-        else if (contact.x <= -0.4f) movementBlocked[3] += 1;
+        movementBlocked[collisionDirection] += 1;
 
-        //set flag on landing
-        if (contact.y <= -0.8f) {
+        //landing on ground
+        if (collisionDirection == 1) {
             midair = false;
             fallTime = 0;
         }
+
+        //hitting ceiling
+        else if (collisionDirection == 0) {
+            jumpTime = 0;
+        }
+
+        pastCollisions.Add(other.name, collisionDirection);
     }
 
     //collision work in progress
     void OnTriggerExit(Collider other) {
-        Vector3 contact = other.ClosestPoint(transform.position) - transform.position;
-        // Debug.Log(contact);
+        int direction = pastCollisions[other.name];
+        movementBlocked[direction] -= 1;
+        pastCollisions.Remove(other.name);
 
-        //contact above, below, left, and right
-        if (contact.y >= 1f) movementBlocked[0] -= 1;
-        else if (contact.y <= -1f) movementBlocked[1] -= 1;
-        else if (contact.x >= 0.4f) movementBlocked[2] -= 1 ;
-        else if (contact.x <= -0.4f) movementBlocked[3] -= 1;
+        //walking off ledge
+        if (direction == 1) {
+            midair = true;
+            if (jumpTime <= 0) fallTime = 0.5f;
+            else fallTime = 0;
+        }
     }
+
+    private void changeTransform(float x, float y, float z) {
+        transform.position += new Vector3(x, y, z);
+    }
+
+    private int checkCollisionDirection(Transform self, Transform other) {
+        //0 = top, 1 = bottom, 2 = right, 3 = left
+
+        //corner order: top right, top left, bottom right, bottom left
+        Vector3[] selfCorners = {
+            new Vector3(self.transform.position.x + self.transform.localScale.x / 2, self.transform.position.y + self.transform.localScale.y / 2, 0),
+            new Vector3(self.transform.position.x - self.transform.localScale.x / 2, self.transform.position.y + self.transform.localScale.y / 2, 0),
+            new Vector3(self.transform.position.x + self.transform.localScale.x / 2, self.transform.position.y - self.transform.localScale.y / 2, 0),
+            new Vector3(self.transform.position.x - self.transform.localScale.x / 2, self.transform.position.y - self.transform.localScale.y / 2, 0)
+        };
+        Vector3[] otherCorners = {
+            new Vector3(other.transform.position.x + other.transform.localScale.x / 2, other.transform.position.y + other.transform.localScale.y / 2, 0),
+            new Vector3(other.transform.position.x - other.transform.localScale.x / 2, other.transform.position.y + other.transform.localScale.y / 2, 0),
+            new Vector3(other.transform.position.x + other.transform.localScale.x / 2, other.transform.position.y - other.transform.localScale.y / 2, 0),
+            new Vector3(other.transform.position.x - other.transform.localScale.x / 2, other.transform.position.y - other.transform.localScale.y / 2, 0)
+        };
+
+        //check if each corner is within other object
+        bool[] collisionCorners = new bool[8];
+        
+        //self top right
+        collisionCorners[0] = compareCornerNW(otherCorners[3], selfCorners[0], otherCorners[0]);
+        //self top left
+        collisionCorners[1] = compareCornerSW(otherCorners[2], selfCorners[1], otherCorners[1]);
+        //self bottom right
+        collisionCorners[2] = compareCornerSW(otherCorners[2], selfCorners[2], otherCorners[1]);
+        //self bottom left
+        collisionCorners[3] = compareCornerNW(otherCorners[3], selfCorners[3], otherCorners[0]);
+        //other top right
+        collisionCorners[4] = compareCornerNW(selfCorners[3], otherCorners[0], selfCorners[0]);
+        //self top left
+        collisionCorners[5] = compareCornerSW(selfCorners[2], otherCorners[1], selfCorners[1]);
+        //self bottom right
+        collisionCorners[6] = compareCornerSW(selfCorners[2], otherCorners[2], selfCorners[1]);
+        //other bottom left
+        collisionCorners[7] = compareCornerNW(selfCorners[3], otherCorners[3], selfCorners[0]);
+        // for (int i = 0; i < 8; i++) if (collisionCorners[i]) Debug.Log(i);
+       
+        //check collision direction
+        if (collisionCorners[0] && collisionCorners[1]) return 0;
+        else if (collisionCorners[2] && collisionCorners[3]) return 1;
+        else if (collisionCorners[0] && collisionCorners[2]) return 2;
+        else if (collisionCorners[1] && collisionCorners[3]) return 3;
+        else if (collisionCorners[0]) {
+            Vector3 diff = selfCorners[0] - otherCorners[3];
+            if (diff.x > diff.y) return 0;
+            else return 2;
+        }
+        else if (collisionCorners[1]) {
+            Vector3 diff = selfCorners[1] - otherCorners[2];
+            if (-diff.x > diff.y) return 0;
+            else return 3;
+        }
+        else if (collisionCorners[2]) {
+            Vector3 diff = otherCorners[0] - selfCorners[2];
+            if (diff.x > diff.y) return 1;
+            else return 3;
+        }
+        else if (collisionCorners[3]) {
+            Vector3 diff = otherCorners[1] - selfCorners[3];
+            if (-diff.x > diff.y) return 1;
+            else return 2;
+        }
+
+        if (collisionCorners[6] && collisionCorners[7]) return 0;
+        else if (collisionCorners[4] && collisionCorners[5]) return 1;
+        else if (collisionCorners[5] && collisionCorners[7]) return 2;
+        else if (collisionCorners[4] && collisionCorners[6]) return 3;
+
+        return -1;
+    }
+
+    //check if mid is between low and high in NW direction
+    private bool compareCornerNW(Vector3 low, Vector3 mid, Vector3 high) {
+        Vector3 v1 = mid - low;
+        Vector3 v2 = high - mid;
+        return (v1.x >= 0 && v1.y >= 0 && v2.x >= 0 && v2.y >= 0);
+    }
+
+    //check if mid is between low and high in SW direction
+    private bool compareCornerSW(Vector3 low, Vector3 mid, Vector3 high) {
+        Vector3 v1 = mid - low;
+        Vector3 v2 = high - mid;
+        return (v1.x <= 0 && v1.y >= 0 && v2.x <= 0 && v2.y >= 0);
+    }
+
 
     public virtual float[] GetInput() {
         return new float[] {0, 0};
@@ -106,6 +206,8 @@ public class Character : MonoBehaviour
         midair = true;
         jumpTime = jumpDuration;
     }
+
+    
 
 
 }
