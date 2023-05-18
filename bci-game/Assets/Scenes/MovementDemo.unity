@@ -214,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 20439736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 1.5, z: 0}
-  m_LocalScale: {x: 3, y: 0.4, z: 1}
+  m_LocalScale: {x: 2, y: 0.4, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -332,9 +332,9 @@ Rigidbody:
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 3
+  m_CollisionDetection: 0
 --- !u!114 &209677994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,12 +347,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99df06503863ea24ea2d13a05758ea3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  gravity: 20
+  moveSpeed: 7.5
+  gravity: 10
   airPenalty: 0.75
-  jumpSpeed: 40
+  jumpSpeed: 20
   jumpDuration: 0.75
-  movementBlocked: 00000000000000000000000000000000
 --- !u!1 &370914886
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +443,7 @@ Transform:
   m_GameObject: {fileID: 370914886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 4.5, z: 0}
-  m_LocalScale: {x: 3, y: 0.4, z: 1}
+  m_LocalScale: {x: 2, y: 0.4, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -541,7 +540,7 @@ Transform:
   m_GameObject: {fileID: 692861535}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.1, z: 0}
-  m_LocalScale: {x: 100, y: 0.5, z: 1}
+  m_LocalScale: {x: 100, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -815,8 +814,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117863752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 2.5, z: 0}
-  m_LocalScale: {x: 3, y: 0.4, z: 1}
+  m_LocalPosition: {x: -3.5, y: 2.5, z: 0}
+  m_LocalScale: {x: 2, y: 0.4, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
