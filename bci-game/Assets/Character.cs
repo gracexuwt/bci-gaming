@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public float moveSpeed = 15f; //all speed in units/s
-    public float gravity = 20f; //gravity accelaration
+    public float moveSpeed = 5f; //all speed in units/s
+    public float gravity = 8f; //gravity accelaration
     public float airPenalty = 0.75f; //reduction in left/right speed while midair
-    public float jumpSpeed = 40f;
+    public float jumpSpeed = 15f;
     public float jumpDuration = 0.75f; //seconds
 
-    public int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
+    private int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
     private bool midair = false;
     private float fallTime = 0; //tracks time spent in the air
     private float jumpTime = 0; //tracks time since last jump
@@ -30,26 +30,26 @@ public class Character : MonoBehaviour
         if (!midair && inputs[1] > 0) Jump();
         
         //get horizontal velocity and check if movement is blocked
-        float hChange = updateHorizontal(inputs[0]) * Time.deltaTime;
+        float hChange = UpdateHorizontal(inputs[0]) * Time.deltaTime;
         if (hChange > 0 && movementBlocked[2] > 0) hChange = 0;
         else if (hChange < 0 && movementBlocked[3] > 0) hChange = 0;
 
         //get vertical velocity and check
-        float vChange = updateVertical() * Time.deltaTime;
+        float vChange = UpdateVertical() * Time.deltaTime;
         if (vChange > 0 && movementBlocked[0] > 0) vChange = 0;
         else if (vChange < 0 && movementBlocked[1] > 0) vChange = 0;
 
         //update position
-        transform.position += new Vector3(hChange, vChange, 0);
+        StartCoroutine(MoveCharacter(new Vector3 (hChange, vChange, 0)));
     }
 
-    float updateHorizontal(float hInput) {
+    float UpdateHorizontal(float hInput) {
         float hMvmt = hInput * moveSpeed;
         if (midair) hMvmt *= airPenalty;
         return hMvmt;
     }
 
-    float updateVertical() {
+    float UpdateVertical() {
         float vMvmt = 0f;
 
         if (midair) {
@@ -65,12 +65,16 @@ public class Character : MonoBehaviour
 
     }
 
-    //collision work in progress
+    IEnumerator MoveCharacter(Vector3 movement){
+        transform.position += movement;
+        yield return null;
+    }
+
+    //entering collision: block movement in collision direction
     void OnTriggerEnter(Collider other) {
 
         //check collisions by examining each corner of character and other object
-        int collisionDirection = checkCollisionDirection(transform, other.gameObject.transform); //0 = top, 1 = bottom, 2 = right, 3 = left;
-        // Debug.Log(collisionDirection);
+        int collisionDirection = CheckCollisionDirection(transform, other.gameObject.transform); //0 = top, 1 = bottom, 2 = right, 3 = left;
 
         //contact above, below, left, and right
         movementBlocked[collisionDirection] += 1;
@@ -86,10 +90,13 @@ public class Character : MonoBehaviour
             jumpTime = 0;
         }
 
+        RemoveOverlap(collisionDirection, transform, other.gameObject.transform);
+
+        //store collision info for exit function
         pastCollisions.Add(other.name, collisionDirection);
     }
 
-    //collision work in progress
+    //exiting collision: restore movement
     void OnTriggerExit(Collider other) {
         int direction = pastCollisions[other.name];
         movementBlocked[direction] -= 1;
@@ -103,11 +110,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void changeTransform(float x, float y, float z) {
-        transform.position += new Vector3(x, y, z);
-    }
-
-    private int checkCollisionDirection(Transform self, Transform other) {
+    private int CheckCollisionDirection(Transform self, Transform other) {
         //0 = top, 1 = bottom, 2 = right, 3 = left
 
         //corner order: top right, top left, bottom right, bottom left
@@ -128,21 +131,21 @@ public class Character : MonoBehaviour
         bool[] collisionCorners = new bool[8];
         
         //self top right
-        collisionCorners[0] = compareCornerNW(otherCorners[3], selfCorners[0], otherCorners[0]);
+        collisionCorners[0] = CompareCornerNW(otherCorners[3], selfCorners[0], otherCorners[0]);
         //self top left
-        collisionCorners[1] = compareCornerSW(otherCorners[2], selfCorners[1], otherCorners[1]);
+        collisionCorners[1] = CompareCornerSW(otherCorners[2], selfCorners[1], otherCorners[1]);
         //self bottom right
-        collisionCorners[2] = compareCornerSW(otherCorners[2], selfCorners[2], otherCorners[1]);
+        collisionCorners[2] = CompareCornerSW(otherCorners[2], selfCorners[2], otherCorners[1]);
         //self bottom left
-        collisionCorners[3] = compareCornerNW(otherCorners[3], selfCorners[3], otherCorners[0]);
+        collisionCorners[3] = CompareCornerNW(otherCorners[3], selfCorners[3], otherCorners[0]);
         //other top right
-        collisionCorners[4] = compareCornerNW(selfCorners[3], otherCorners[0], selfCorners[0]);
+        collisionCorners[4] = CompareCornerNW(selfCorners[3], otherCorners[0], selfCorners[0]);
         //self top left
-        collisionCorners[5] = compareCornerSW(selfCorners[2], otherCorners[1], selfCorners[1]);
+        collisionCorners[5] = CompareCornerSW(selfCorners[2], otherCorners[1], selfCorners[1]);
         //self bottom right
-        collisionCorners[6] = compareCornerSW(selfCorners[2], otherCorners[2], selfCorners[1]);
+        collisionCorners[6] = CompareCornerSW(selfCorners[2], otherCorners[2], selfCorners[1]);
         //other bottom left
-        collisionCorners[7] = compareCornerNW(selfCorners[3], otherCorners[3], selfCorners[0]);
+        collisionCorners[7] = CompareCornerNW(selfCorners[3], otherCorners[3], selfCorners[0]);
         // for (int i = 0; i < 8; i++) if (collisionCorners[i]) Debug.Log(i);
        
         //check collision direction
@@ -180,19 +183,48 @@ public class Character : MonoBehaviour
     }
 
     //check if mid is between low and high in NW direction
-    private bool compareCornerNW(Vector3 low, Vector3 mid, Vector3 high) {
+    private bool CompareCornerNW(Vector3 low, Vector3 mid, Vector3 high) {
         Vector3 v1 = mid - low;
         Vector3 v2 = high - mid;
         return (v1.x >= 0 && v1.y >= 0 && v2.x >= 0 && v2.y >= 0);
     }
 
     //check if mid is between low and high in SW direction
-    private bool compareCornerSW(Vector3 low, Vector3 mid, Vector3 high) {
+    private bool CompareCornerSW(Vector3 low, Vector3 mid, Vector3 high) {
         Vector3 v1 = mid - low;
         Vector3 v2 = high - mid;
         return (v1.x <= 0 && v1.y >= 0 && v2.x <= 0 && v2.y >= 0);
     }
 
+    //move character so it does not overlap with platform
+    private void RemoveOverlap(int direction, Transform self, Transform other) {
+        float overlap;
+        Vector3 change = new Vector3(0, 0, 0);
+
+        //calculate overlap of objects
+        //top
+        if (direction == 0) {
+            overlap = self.transform.position.y + self.transform.localScale.y / 2 - (other.transform.position.y - other.transform.localScale.y / 2);
+            if (overlap > 0) change.y -= overlap;
+        }
+        //bottom
+        if (direction == 1) {
+            overlap = other.transform.position.y + other.transform.localScale.y / 2 - (self.transform.position.y - self.transform.localScale.y / 2);
+            if (overlap > 0) change.y += overlap;
+        }
+        //right
+        if (direction == 2) {
+            overlap = self.transform.position.x + self.transform.localScale.x / 2 - (other.transform.position.x - other.transform.localScale.x / 2);
+            if (overlap > 0) change.x -= overlap;
+        }
+        //left
+        if (direction == 3) {
+            overlap = other.transform.position.x + other.transform.localScale.x / 2 - (self.transform.position.x - self.transform.localScale.x / 2);
+            if (overlap > 0) change.x += overlap;
+        }
+
+        StartCoroutine(MoveCharacter(change));
+    }
 
     public virtual float[] GetInput() {
         return new float[] {0, 0};
