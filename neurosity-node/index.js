@@ -38,6 +38,11 @@ const main = async () => {
 
   // DO STUFF HERE
 
+  const neurosity = new Neurosity();
+  neurosity.brainwaves("raw").subscribe((brainwaves) => {
+    console.log(brainwaves);
+  });
+
   neurosity.calm().subscribe((calm) => {
     console.log(calm.probability);
     if (calm.probability > 0.3) {
