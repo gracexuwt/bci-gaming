@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Animator animator;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public Transform attackPoint;
@@ -24,7 +25,7 @@ public class Enemy : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log(enemy.name + " was hit");
+            Debug.Log("We hit " + enemy.name);
         }
     }
 }

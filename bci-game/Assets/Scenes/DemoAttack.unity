@@ -560,6 +560,8 @@ GameObject:
   - component: {fileID: 757289119}
   - component: {fileID: 757289118}
   - component: {fileID: 757289117}
+  - component: {fileID: 757289123}
+  - component: {fileID: 757289124}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -574,7 +576,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757289116}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99df06503863ea24ea2d13a05758ea3c, type: 3}
   m_Name: 
@@ -678,6 +680,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &757289123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757289116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda06e3e509e646a398b9fe27560dea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  attackPoint: {fileID: 0}
+--- !u!114 &757289124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757289116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689456c954dd3d144b36bc4ef2d4a0c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  gravity: 8
+  airPenalty: 0.75
+  jumpSpeed: 15
+  jumpDuration: 0.75
 --- !u!1 &939272531
 GameObject:
   m_ObjectHideFlags: 0
