@@ -1,4 +1,4 @@
-const { Neurosity } = require("@neurosity/sdk");
+const {Neurosity} = require("@neurosity/sdk");
 require("dotenv").config();
 
 const deviceId = process.env.DEVICE_ID || "";
@@ -20,11 +20,10 @@ verifyEnvs(email, password, deviceId);
 
 console.log(`${email} attempting to authenticate to ${deviceId}`);
 
-const neurosity = new Neurosity({
-  deviceId,
-});
-
 const main = async () => {
+  const neurosity = new Neurosity({
+    deviceId,
+  });
   await neurosity
     .login({
       email,
@@ -38,7 +37,7 @@ const main = async () => {
 
   // DO STUFF HERE
 
-  const neurosity = new Neurosity();
+  // const neurosity = new Neurosity();
   neurosity.brainwaves("raw").subscribe((brainwaves) => {
     console.log(brainwaves);
   });
