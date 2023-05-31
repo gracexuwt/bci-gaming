@@ -77,7 +77,8 @@ public class Character : MonoBehaviour
         int collisionDirection = CheckCollisionDirection(transform, other.gameObject.transform); //0 = top, 1 = bottom, 2 = right, 3 = left;
 
         //contact above, below, left, and right
-        movementBlocked[collisionDirection] += 1;
+        // Debug.Log(name + " Collision Direction: " + collisionDirection.ToString());
+        if (collisionDirection >= 0 && collisionDirection <= 3) movementBlocked[collisionDirection] += 1;
 
         //landing on ground
         if (collisionDirection == 1) {
@@ -140,13 +141,13 @@ public class Character : MonoBehaviour
         collisionCorners[3] = CompareCornerNW(otherCorners[3], selfCorners[3], otherCorners[0]);
         //other top right
         collisionCorners[4] = CompareCornerNW(selfCorners[3], otherCorners[0], selfCorners[0]);
-        //self top left
+        //other top left
         collisionCorners[5] = CompareCornerSW(selfCorners[2], otherCorners[1], selfCorners[1]);
-        //self bottom right
+        //other bottom right
         collisionCorners[6] = CompareCornerSW(selfCorners[2], otherCorners[2], selfCorners[1]);
         //other bottom left
         collisionCorners[7] = CompareCornerNW(selfCorners[3], otherCorners[3], selfCorners[0]);
-        // for (int i = 0; i < 8; i++) if (collisionCorners[i]) Debug.Log(i);
+        // for (int i = 0; i < 8; i++) if (collisionCorners[i]) Debug.Log(self.name + " Collision Corner: " + i.ToString());
        
         //check collision direction
         if (collisionCorners[0] && collisionCorners[1]) return 0;
@@ -166,12 +167,12 @@ public class Character : MonoBehaviour
         else if (collisionCorners[2]) {
             Vector3 diff = otherCorners[0] - selfCorners[2];
             if (diff.x > diff.y) return 1;
-            else return 3;
+            else return 2;
         }
         else if (collisionCorners[3]) {
             Vector3 diff = otherCorners[1] - selfCorners[3];
             if (-diff.x > diff.y) return 1;
-            else return 2;
+            else return 3;
         }
 
         if (collisionCorners[6] && collisionCorners[7]) return 0;
@@ -186,14 +187,14 @@ public class Character : MonoBehaviour
     private bool CompareCornerNW(Vector3 low, Vector3 mid, Vector3 high) {
         Vector3 v1 = mid - low;
         Vector3 v2 = high - mid;
-        return (v1.x >= 0 && v1.y >= 0 && v2.x >= 0 && v2.y >= 0);
+        return (v1.x > -0.001 && v1.y > -0.001 && v2.x > -0.001 && v2.y > -0.001);
     }
 
     //check if mid is between low and high in SW direction
     private bool CompareCornerSW(Vector3 low, Vector3 mid, Vector3 high) {
         Vector3 v1 = mid - low;
         Vector3 v2 = high - mid;
-        return (v1.x <= 0 && v1.y >= 0 && v2.x <= 0 && v2.y >= 0);
+        return (v1.x < 0.001 && v1.y > -0.001 && v2.x < 0.001 && v2.y > -0.001);
     }
 
     //move character so it does not overlap with platform
@@ -222,6 +223,7 @@ public class Character : MonoBehaviour
             overlap = other.transform.position.x + other.transform.localScale.x / 2 - (self.transform.position.x - self.transform.localScale.x / 2);
             if (overlap > 0) change.x += overlap;
         }
+        // Debug.Log(self.name + " Overlap: " + change.ToString() + " Direction: " + direction.ToString());
 
         StartCoroutine(MoveCharacter(change));
     }
