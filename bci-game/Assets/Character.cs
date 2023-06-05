@@ -9,8 +9,8 @@ public class Character : MonoBehaviour
     public float airPenalty = 0.75f; //reduction in left/right speed while midair
     public float jumpSpeed = 15f;
     public float jumpDuration = 0.75f; //seconds
+    public int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
 
-    private int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
     private bool midair = false;
     private float fallTime = 0; //tracks time spent in the air
     private float jumpTime = 0; //tracks time since last jump
@@ -43,13 +43,13 @@ public class Character : MonoBehaviour
         StartCoroutine(MoveCharacter(new Vector3 (hChange, vChange, 0)));
     }
 
-    float UpdateHorizontal(float hInput) {
+    protected float UpdateHorizontal(float hInput) {
         float hMvmt = hInput * moveSpeed;
         if (midair) hMvmt *= airPenalty;
         return hMvmt;
     }
 
-    float UpdateVertical() {
+    protected float UpdateVertical() {
         float vMvmt = 0f;
 
         if (midair) {
@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
 
     }
 
-    IEnumerator MoveCharacter(Vector3 movement){
+    protected IEnumerator MoveCharacter(Vector3 movement){
         transform.position += movement;
         yield return null;
     }
