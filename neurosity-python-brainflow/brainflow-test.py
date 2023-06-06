@@ -13,6 +13,7 @@ from brainflow.board_shim import BoardShim, BrainFlowInputParams
 from brainflow.data_filter import DataFilter, FilterTypes, AggOperations, WindowFunctions
 
 def main ():
+    # yaxin
     board_id = BoardIds.CROWN_BOARD.value # or BoardIds.NOTION_2_BOARD.value or BoardIds.NOTION_1_BOARD.value
     params = BrainFlowInputParams ()
     params.board_id = board_id
@@ -70,7 +71,7 @@ def main ():
                            print("WOOO BLINK DETECTED")
                            break                 
 
-    board.stop_stream ()                   
+    board.stop_stream ()
     board.release_session ()
 
 if __name__ == "__main__":
