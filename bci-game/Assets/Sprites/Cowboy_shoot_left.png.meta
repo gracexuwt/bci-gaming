@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: da00c86a214394b439b7cb21ad0593ee
+guid: 574aceb32baf0da47a9970ed85812831
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,70 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bandit_sheet_0
+      name: Cowboy_shoot_left_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77573d1e722736441b111617e0b777c1
+      internalID: 1161860903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cowboy_shoot_left_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b39493d6840372044853717b7a347578
+      internalID: 2026488484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cowboy_shoot_left_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6fd53b37453125488fec29147e6d8f7
+      internalID: 83137944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cowboy_shoot_left_3
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d233e4196af11746af5bf270bd95d41
-      internalID: 601405181
+      spriteID: 76e99de4f1000a64abe8ab63ef112abd
+      internalID: 950345704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bandit_sheet_1
+      name: Cowboy_shoot_left_4
       rect:
         serializedVersion: 2
         x: 64
@@ -140,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63e590e18639c4b47bb455fe23993ada
-      internalID: -935106073
+      spriteID: c88ecb989a2dc98499c78e7fd30412df
+      internalID: -1347029707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bandit_sheet_2
+      name: Cowboy_shoot_left_5
       rect:
         serializedVersion: 2
         x: 128
@@ -161,140 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c59264e4dd92a4a43829e1b7489c588a
-      internalID: 512369698
+      spriteID: 7757003724ee408448e451a81700a86c
+      internalID: -1164036212
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bandit_sheet_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e84205a6631c0e4889b6bb5112e90d9
-      internalID: -957934362
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c0d493f2fdd4f884e9210ef066ee6f0c
-      internalID: 389277891
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dafb879d16cd0ea44b7e5bd4d802ccee
-      internalID: 1620606209
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_6
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5efad2c193e414248814f0f4f4259287
-      internalID: -66863425
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_7
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65d8c71d40baa2f4ab7908c4e2a7992c
-      internalID: 276899622
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_8
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 64
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 425dac7963f447140bc33498435eead9
-      internalID: -1798938762
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_9
+      name: Cowboy_shoot_left_6
       rect:
         serializedVersion: 2
         x: 0
@@ -308,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d3f4d1a2cb02314a9017ce22e180d8e
-      internalID: 1982617002
+      spriteID: d8b7e4092da6fba4a91dbe860b417b4b
+      internalID: -661734959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bandit_sheet_10
+      name: Cowboy_shoot_left_7
       rect:
         serializedVersion: 2
         x: 64
@@ -329,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efc1179414fc7ff499081bb98bb1de48
-      internalID: -214147006
+      spriteID: 28e82cb6fa706e54cb77d78e8af24de9
+      internalID: 1286175745
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bandit_sheet_11
+      name: Cowboy_shoot_left_8
       rect:
         serializedVersion: 2
         x: 128
@@ -350,134 +287,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d4b2ad0c570c7d408255b382eabfcd6
-      internalID: -103124341
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_12
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 151f1360ae5266c459bbf40154ac4f79
-      internalID: -1407773501
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_13
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 642ba131377bc84468fdfd9cffd58123
-      internalID: -885684692
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_14
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1514f3913f9a51a45ad5f25228009c25
-      internalID: -753579115
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_15
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2d6c9f665f44f9e45b88e458a963ecf9
-      internalID: -1750494156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_16
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 0
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e455e28e7284ec4468db5a58bdc2cec9
-      internalID: -259833724
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bandit_sheet_17
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
-        width: 64
-        height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 93699ff04a38a314f88b13f1ce539860
-      internalID: 639644982
+      spriteID: 9fef5ff1a8b20664d8b47df313da2888
+      internalID: 1263478567
       vertices: []
       indices: 
       edges: []
@@ -485,7 +296,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 90fe46571ae346d43813074f3f18b161
+    spriteID: 8cb100a3c23d32347a784af0446076b2
     internalID: 0
     vertices: []
     indices: 
@@ -493,24 +304,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bandit_sheet_0: 601405181
-      bandit_sheet_2: 512369698
-      bandit_sheet_3: -957934362
-      bandit_sheet_4: 389277891
-      bandit_sheet_11: -103124341
-      bandit_sheet_1: -935106073
-      bandit_sheet_13: -885684692
-      bandit_sheet_6: -66863425
-      bandit_sheet_12: -1407773501
-      bandit_sheet_17: 639644982
-      bandit_sheet_15: -1750494156
-      bandit_sheet_5: 1620606209
-      bandit_sheet_14: -753579115
-      bandit_sheet_16: -259833724
-      bandit_sheet_7: 276899622
-      bandit_sheet_9: 1982617002
-      bandit_sheet_8: -1798938762
-      bandit_sheet_10: -214147006
+      Cowboy_shoot_left_2: 83137944
+      Cowboy_shoot_left_5: -1164036212
+      Cowboy_shoot_left_8: 1263478567
+      Cowboy_shoot_left_6: -661734959
+      Cowboy_shoot_left_1: 2026488484
+      Cowboy_shoot_left_0: 1161860903
+      Cowboy_shoot_left_4: -1347029707
+      Cowboy_shoot_left_7: 1286175745
+      Cowboy_shoot_left_3: 950345704
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
