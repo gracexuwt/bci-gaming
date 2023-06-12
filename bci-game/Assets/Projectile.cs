@@ -1,23 +1,23 @@
 using UnityEngine;
 
-public class Projectile {
-    private Sprite sprite;
-    private Vector2 position;
-    private Vector2 velocity;
+public class Projectile : MonoBehaviour {
+    public float speed = 5f; // Speed at which the object moves
+    public Vector3 direction = new Vector3(); // Direction of movement
 
-    public Projectile(Sprite sprite, float x, float y, Vector2 velocity) {
-        this.sprite = sprite;
-        this.position = new Vector2(x, y);
-        this.velocity = velocity;
+    void Start()
+    {
     }
 
-    public void UpdateState(float deltaTime) {
-        position += velocity * deltaTime;
+    // Update is called once per frame
+    void Update()
+    {   
+        transform.position += direction * speed * Time.deltaTime;
+
+        // OnCollisionEnter(Collider other)
     }
 
-    public void Draw() {
-        if (sprite != null) {
-            Graphics.DrawTexture(new Rect(position.x, position.y, sprite.bounds.size.x, sprite.bounds.size.y), sprite.texture);
-        }
+    void OnTriggerEnter(Collider other) {
+        // Destroy the game object if it collides with any other game object
+        Destroy(gameObject);
     }
 }
