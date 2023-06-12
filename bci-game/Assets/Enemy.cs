@@ -10,8 +10,8 @@ public class Enemy : Character
     public Transform frontCheck; 
     public LayerMask playerLayer; 
 
-    private bool canAttack = true; 
-    private bool facingRight = true; 
+    public bool canAttack = true; 
+    public bool facingRight = true; 
 
     private void Awake()
 {
@@ -60,6 +60,7 @@ public class Enemy : Character
         canAttack = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
+        Debug.Log("cooldown");
     }
 
     IEnumerator PerformAttack()
@@ -70,14 +71,9 @@ public class Enemy : Character
             if (hitCollider.CompareTag("Player"))
             {
                 Player player = hitCollider.GetComponent<Player>();
-                Debug.Log("HIT");
-                if (player != null)
-                {
-                    player.TakeDamage(attackDamage);
-                    Debug.Log("HIT");
-                    yield return StartCoroutine(AttackCooldown());
-                    break;
-                }
+                Debug.Log("Player hit");                
+                yield return StartCoroutine("AttackCooldown");
+                break;
             }
         }
     }
