@@ -36,6 +36,7 @@ def main ():
     data = board.get_board_data()
     print("start blinking")
     
+    ## put in start func as calibra
     while(samples < num_samples):
         data = board.get_board_data() 
         if(len(data[1]) > 0):
@@ -46,7 +47,7 @@ def main ():
                 max_val = np.amax(data[1])
  
     blink_thres = 0.5*((max_val - vals_mean)**2) 
-    
+    ## end
     print("mean value")  
     print(vals_mean)
     print("max value")
