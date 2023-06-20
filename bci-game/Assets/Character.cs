@@ -19,7 +19,6 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -41,6 +40,11 @@ public class Character : MonoBehaviour
 
         //update position
         StartCoroutine(MoveCharacter(new Vector3 (hChange, vChange, 0)));
+
+        if (Time.frameCount % 75 == 0)
+        {
+            Shoot(new Vector3(-1,0,0));
+        }
     }
 
     float UpdateHorizontal(float hInput) {
@@ -237,6 +241,22 @@ public class Character : MonoBehaviour
     public void Jump() {
         midair = true;
         jumpTime = jumpDuration;
+    }
+
+    public void Shoot(Vector3 direction) {
+        GameObject bullet = new GameObject();
+        bullet.name = "go1";
+        bullet.AddComponent<MeshFilter>().mesh = Resources.GetBuiltinResource<Mesh>("Sphere.fbx"); // Use built-in sphere mesh
+        bullet.AddComponent<MeshRenderer>(); // Add mesh renderer to render the mesh
+        Projectile proj = bullet.AddComponent<Projectile>() as Projectile;
+        SphereCollider sphereCollider = bullet.AddComponent<SphereCollider>();
+        Rigidbody rigidbody = bullet.AddComponent<Rigidbody>();
+
+        bullet.transform.position = transform.position + new Vector3(-2, 0, 0);
+        bullet.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        proj.direction = direction;
+        sphereCollider.isTrigger = true;
+        rigidbody.useGravity = false;
     }
 
     

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
-    public float speed = 5f; // Speed at which the object moves
+    public float speed = 10f; // Speed at which the object moves
     public Vector3 direction = new Vector3(); // Direction of movement
 
     void Start()
