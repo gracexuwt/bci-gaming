@@ -56,7 +56,6 @@ public class Character : MonoBehaviour
     float UpdateHorizontal(float hInput) {
         float hMvmt = hInput * moveSpeed;
         if (midair) hMvmt *= airPenalty;
-        // Flip the sprite's scale based on the facing direction
         return hMvmt;
     }
 
