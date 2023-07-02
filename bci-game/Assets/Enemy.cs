@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    public float attackRange = 5f; 
+    public float attackRange = 0.1f; 
     public int attackDamage = 10; 
     public float attackCooldown = 2f; 
     public Transform frontCheck; 
     public LayerMask playerLayer; 
 
-    public bool canAttack = true; 
-    public bool facingRight = true; 
+    private bool canAttack = true; 
+    private bool facingRight = true; 
 
     private void Awake()
-{
-    playerLayer = LayerMask.GetMask("Player");
-}
+    {
+        playerLayer = LayerMask.GetMask("Player");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class Enemy : Character
 
         float hChange = UpdateHorizontal(inputs[0]) * Time.deltaTime;
         
-        // FLip movement direction if enemy encounters an obsticle
+        // Flip movement direction if enemy encounters an obstacle
         if (hChange > 0 && movementBlocked[2] > 0)
         {
             hChange = 0;
@@ -51,29 +51,34 @@ public class Enemy : Character
 
         if (canAttack && IsPlayerInAttackRange())
         {
-            StartCoroutine(PerformAttack());
+            PerformAttack();
         }
     }
 
     IEnumerator AttackCooldown()
     {
-        canAttack = false;
-        yield return new WaitForSeconds(attackCooldown);
-        canAttack = true;
-        Debug.Log("cooldown");
+        while (true)
+        {
+            canAttack = false;
+            yield return new WaitForSeconds(attackCooldown);
+            canAttack = true;
+            yield return null;
+        }
     }
 
-    IEnumerator PerformAttack()
+    void PerformAttack()
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, attackRange);
-        foreach (var hitCollider in hitColliders)
+        if (IsPlayerInAttackRange())
         {
-            if (hitCollider.CompareTag("Player"))
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, attackRange);
+            foreach (var hitCollider in hitColliders)
             {
-                Player player = hitCollider.GetComponent<Player>();
-                Debug.Log("Player hit");                
-                yield return StartCoroutine("AttackCooldown");
-                break;
+                if (hitCollider.CompareTag("Player"))
+                {
+                    Player player = hitCollider.GetComponent<Player>();
+                    Debug.Log("Player hit");
+                    break;
+                }
             }
         }
     }
@@ -85,13 +90,12 @@ public class Enemy : Character
         else
             return new float[] { -1, 0 }; 
     }
-
     public bool IsPlayerInAttackRange()
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(frontCheck.position, attackRange, playerLayer);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Player"))
+            if (hitCollider.gameObject.CompareTag("Player"))
             {
                 return true;
             }
