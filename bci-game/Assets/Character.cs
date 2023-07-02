@@ -10,16 +10,18 @@ public class Character : MonoBehaviour
     public float jumpSpeed = 15f;
     public float jumpDuration = 0.75f; //seconds
 
+    private bool isFacingRight = true; //tracks if character is facing right
     private int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
     private bool midair = false;
     private float fallTime = 0; //tracks time spent in the air
     private float jumpTime = 0; //tracks time since last jump
     private IDictionary<string, int> pastCollisions = new Dictionary<string, int>();
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -27,7 +29,9 @@ public class Character : MonoBehaviour
     {   
         //get movement inputs, LR used to determine horizontal movement, up to start jump
         float[] inputs = GetInput();
-        if (!midair && inputs[1] > 0) Jump();
+        if (!midair && inputs[1] > 0) {
+            Jump();
+        } 
         
         //get horizontal velocity and check if movement is blocked
         float hChange = UpdateHorizontal(inputs[0]) * Time.deltaTime;
@@ -41,6 +45,12 @@ public class Character : MonoBehaviour
 
         //update position
         StartCoroutine(MoveCharacter(new Vector3 (hChange, vChange, 0)));
+        if (inputs[0] != 0) {
+            animator.SetFloat("X", inputs[0]+0.5F);
+            animator.SetBool("IsWalking", true);
+        } else {
+            animator.SetBool("IsWalking", false);
+        }
     }
 
     float UpdateHorizontal(float hInput) {
@@ -54,8 +64,11 @@ public class Character : MonoBehaviour
 
         if (midair) {
             if (jumpTime > 0) {
+                animator.SetBool("isJumping", true);
                 vMvmt += jumpSpeed * jumpTime;
                 jumpTime -= Time.deltaTime;
+            } else {
+                animator.SetBool("isJumping", false);
             }
             //v = gt implementation
             fallTime += Time.deltaTime;
@@ -237,6 +250,7 @@ public class Character : MonoBehaviour
     public void Jump() {
         midair = true;
         jumpTime = jumpDuration;
+        animator.SetTrigger("takeoff");
     }
 
     
