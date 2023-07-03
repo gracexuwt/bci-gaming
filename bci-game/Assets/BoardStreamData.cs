@@ -43,6 +43,7 @@ public class BoardStreamData : MonoBehaviour {
 			data = board.get_current_board_data();
 			Debug.Log("start blinking");
 
+			// modularize this loop code into a method
 			while (samples < num_samples) {
 				data = board.get_current_board_data();
                 if (data[1].Length > 0) {
