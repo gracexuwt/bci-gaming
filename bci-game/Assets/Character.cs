@@ -24,26 +24,32 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        //get movement inputs, LR used to determine horizontal movement, up to start jump
-        float[] inputs = GetInput();
-        if (!midair && inputs[1] > 0) Jump();
+        // Get movement inputs, LR used to determine horizontal movement, up to start jump
+        object[] inputs = GetInput() as object[];
+        float horizontalInput = (float)inputs[0];
+        float verticalInput = (float)inputs[1];
+
+        if (!midair && verticalInput > 0) Jump();
         
-        //get horizontal velocity and check if movement is blocked
-        float hChange = UpdateHorizontal(inputs[0]) * Time.deltaTime;
+        // Get horizontal velocity and check if movement is blocked
+        float hChange = UpdateHorizontal(horizontalInput) * Time.deltaTime;
         if (hChange > 0 && movementBlocked[2] > 0) hChange = 0;
         else if (hChange < 0 && movementBlocked[3] > 0) hChange = 0;
-
-        //get vertical velocity and check
+        
+        // Get vertical velocity and check
         float vChange = UpdateVertical() * Time.deltaTime;
         if (vChange > 0 && movementBlocked[0] > 0) vChange = 0;
         else if (vChange < 0 && movementBlocked[1] > 0) vChange = 0;
-
-        //update position
+        
+        // Update position
         StartCoroutine(MoveCharacter(new Vector3 (hChange, vChange, 0)));
 
-        if (Time.frameCount % 75 == 0)
+        if ((bool)inputs[3])
         {
-            Shoot(new Vector3(-1,0,0));
+            if (Time.frameCount % 60 == 0)
+            {
+                Shoot((Vector3)inputs[2]);
+            }
         }
     }
 
@@ -76,6 +82,10 @@ public class Character : MonoBehaviour
 
     //entering collision: block movement in collision direction
     void OnTriggerEnter(Collider other) {
+        Projectile proj = other.GetComponent<Projectile>();
+        if (proj != null) {
+            return;
+        }
 
         //check collisions by examining each corner of character and other object
         int collisionDirection = CheckCollisionDirection(transform, other.gameObject.transform); //0 = top, 1 = bottom, 2 = right, 3 = left;
@@ -102,6 +112,11 @@ public class Character : MonoBehaviour
 
     //exiting collision: restore movement
     void OnTriggerExit(Collider other) {
+        Projectile proj = other.GetComponent<Projectile>();
+        if (proj != null) {
+            return;
+        }
+
         int direction = pastCollisions[other.name];
         movementBlocked[direction] -= 1;
         pastCollisions.Remove(other.name);
@@ -230,8 +245,8 @@ public class Character : MonoBehaviour
         StartCoroutine(MoveCharacter(change));
     }
 
-    public virtual float[] GetInput() {
-        return new float[] {0, 0};
+    public virtual object[] GetInput() {
+        return new object[] {0, 0};
     }
 
     public bool Midair() {
@@ -252,7 +267,7 @@ public class Character : MonoBehaviour
         SphereCollider sphereCollider = bullet.AddComponent<SphereCollider>();
         Rigidbody rigidbody = bullet.AddComponent<Rigidbody>();
 
-        bullet.transform.position = transform.position + new Vector3(-2, 0, 0);
+        bullet.transform.position = transform.position;
         bullet.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         proj.direction = direction;
         sphereCollider.isTrigger = true;
