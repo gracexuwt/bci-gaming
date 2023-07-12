@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    public float attackRange = 0.1f; 
+    public float attackRange = 1f; 
     public int attackDamage = 10; 
     public float attackCooldown = 2f; 
     public Transform frontCheck; 
@@ -70,7 +70,7 @@ public class Enemy : Character
     {
         if (IsPlayerInAttackRange())
         {
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, attackRange);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
             foreach (var hitCollider in hitColliders)
             {
                 if (hitCollider.CompareTag("Player"))
@@ -92,7 +92,7 @@ public class Enemy : Character
     }
     public bool IsPlayerInAttackRange()
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(frontCheck.position, attackRange, playerLayer);
+        Collider[] hitColliders = Physics.OverlapSphere(frontCheck.position, attackRange, playerLayer);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.gameObject.CompareTag("Player"))
