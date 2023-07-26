@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
-    public GameObject gameOverInterface;
+    public GameObject gameOverScreen;
+    //public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameOverInterface.activeInHierarchy)
+        if(gameOverScreen.activeInHierarchy)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -28,21 +29,25 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    public void gameOver()
+    // Will be called when health bar is depleted
+    /* public void gameOver()
     {
-        gameOverInterface.SetActive(true);
-    }
+        gameOverScreen.SetActive(true);
+    } */
 
+    // Restarts level
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // Back to menu scene
     public void mainMenu() 
     {
         SceneManager.LoadScene("Menu");
     }
 
+    // Quit game
     public void quit()
     {
         Application.Quit();
