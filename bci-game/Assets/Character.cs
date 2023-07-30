@@ -87,10 +87,12 @@ public class Character : MonoBehaviour
     void OnTriggerEnter(Collider other) {
 
         //check collisions by examining each corner of character and other object
-        int collisionDirection = CheckCollisionDirection(transform, other.gameObject.transform); //0 = top, 1 = bottom, 2 = right, 3 = left;
-
+        BoxCollider otherBox = other.gameObject.GetComponent<BoxCollider>();
+        int collisionDirection = CheckCollisionDirection(GetComponent<BoxCollider>(), otherBox); 
+        //0 = top, 1 = bottom, 2 = right, 3 = left;
+        //Debug.Log(collisionDirection);
         //contact above, below, left, and right
-        movementBlocked[collisionDirection] += 1;
+        if (collisionDirection >= 0) movementBlocked[collisionDirection] += 1;
 
         //landing on ground
         if (collisionDirection == 1) {
@@ -103,7 +105,7 @@ public class Character : MonoBehaviour
             jumpTime = 0;
         }
 
-        RemoveOverlap(collisionDirection, transform, other.gameObject.transform);
+        RemoveOverlap(collisionDirection, GetComponent<BoxCollider>(), otherBox);
 
         //store collision info for exit function
         pastCollisions.Add(other.name, collisionDirection);
@@ -123,21 +125,32 @@ public class Character : MonoBehaviour
         }
     }
 
-    private int CheckCollisionDirection(Transform self, Transform other) {
+    private int CheckCollisionDirection(BoxCollider self, BoxCollider other) {
         //0 = top, 1 = bottom, 2 = right, 3 = left
 
+        float xpos = self.transform.position.x;
+        float ypos = self.transform.position.y;
+        float xsize = self.size.x * self.transform.localScale.x / 2;
+        float ysize = self.size.y * self.transform.localScale.y / 2;
+        
         //corner order: top right, top left, bottom right, bottom left
         Vector3[] selfCorners = {
-            new Vector3(self.transform.position.x + self.transform.localScale.x / 2, self.transform.position.y + self.transform.localScale.y / 2, 0),
-            new Vector3(self.transform.position.x - self.transform.localScale.x / 2, self.transform.position.y + self.transform.localScale.y / 2, 0),
-            new Vector3(self.transform.position.x + self.transform.localScale.x / 2, self.transform.position.y - self.transform.localScale.y / 2, 0),
-            new Vector3(self.transform.position.x - self.transform.localScale.x / 2, self.transform.position.y - self.transform.localScale.y / 2, 0)
+            new Vector3(xpos + xsize, ypos + ysize, 0),
+            new Vector3(xpos - xsize, ypos + ysize, 0),
+            new Vector3(xpos + xsize, ypos - ysize, 0),
+            new Vector3(xpos - xsize, ypos - ysize, 0)
         };
+
+        xpos = other.transform.position.x;
+        ypos = other.transform.position.y;
+        xsize = other.size.x * other.transform.localScale.x / 2;
+        ysize = other.size.y * other.transform.localScale.y / 2;
+
         Vector3[] otherCorners = {
-            new Vector3(other.transform.position.x + other.transform.localScale.x / 2, other.transform.position.y + other.transform.localScale.y / 2, 0),
-            new Vector3(other.transform.position.x - other.transform.localScale.x / 2, other.transform.position.y + other.transform.localScale.y / 2, 0),
-            new Vector3(other.transform.position.x + other.transform.localScale.x / 2, other.transform.position.y - other.transform.localScale.y / 2, 0),
-            new Vector3(other.transform.position.x - other.transform.localScale.x / 2, other.transform.position.y - other.transform.localScale.y / 2, 0)
+            new Vector3(xpos + xsize, ypos + ysize, 0),
+            new Vector3(xpos - xsize, ypos + ysize, 0),
+            new Vector3(xpos + xsize, ypos - ysize, 0),
+            new Vector3(xpos - xsize, ypos - ysize, 0)
         };
 
         //check if each corner is within other object
@@ -210,31 +223,36 @@ public class Character : MonoBehaviour
     }
 
     //move character so it does not overlap with platform
-    private void RemoveOverlap(int direction, Transform self, Transform other) {
+    private void RemoveOverlap(int direction, BoxCollider self, BoxCollider other) {
         float overlap;
         Vector3 change = new Vector3(0, 0, 0);
 
         //calculate overlap of objects
         //top
         if (direction == 0) {
-            overlap = self.transform.position.y + self.transform.localScale.y / 2 - (other.transform.position.y - other.transform.localScale.y / 2);
+            overlap = self.transform.position.y + self.transform.localScale.y * self.size.y / 2 - 
+                (other.transform.position.y - other.transform.localScale.y * other.size.y / 2);
             if (overlap > 0) change.y -= overlap;
         }
         //bottom
         if (direction == 1) {
-            overlap = other.transform.position.y + other.transform.localScale.y / 2 - (self.transform.position.y - self.transform.localScale.y / 2);
+            overlap = other.transform.position.y + other.transform.localScale.y * other.size.y / 2 - 
+                (self.transform.position.y - self.transform.localScale.y * self.size.y / 2);
             if (overlap > 0) change.y += overlap;
         }
         //right
         if (direction == 2) {
-            overlap = self.transform.position.x + self.transform.localScale.x / 2 - (other.transform.position.x - other.transform.localScale.x / 2);
+            overlap = self.transform.position.x + self.transform.localScale.x * self.size.x / 2 - 
+                (other.transform.position.x - other.transform.localScale.x * other.size.x / 2);
             if (overlap > 0) change.x -= overlap;
         }
         //left
         if (direction == 3) {
-            overlap = other.transform.position.x + other.transform.localScale.x / 2 - (self.transform.position.x - self.transform.localScale.x / 2);
+            overlap = other.transform.position.x + other.transform.localScale.x * other.size.x / 2 - 
+                (self.transform.position.x - self.transform.localScale.x * self.size.x / 2);
             if (overlap > 0) change.x += overlap;
         }
+        //Debug.Log(change);
 
         StartCoroutine(MoveCharacter(change));
     }
