@@ -1,6 +1,6 @@
 # bci-gaming
 
-BCI Gaming Team is very cool
+BCI Gaming Team is developing a 2D platformer game that relies on EEG input to control character movement and actions.
 
 # Getting started
 
