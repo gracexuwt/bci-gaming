@@ -9,14 +9,16 @@ public class Character : MonoBehaviour
     public float airPenalty = 0.75f; //reduction in left/right speed while midair
     public float jumpSpeed = 15f;
     public float jumpDuration = 0.75f; //seconds
+    public int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
+    public Animator animator;
+
 
     private bool isFacingRight = true; //tracks if character is facing right
-    private int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
     private bool midair = false;
     private float fallTime = 0; //tracks time spent in the air
     private float jumpTime = 0; //tracks time since last jump
-    private IDictionary<string, int> pastCollisions = new Dictionary<string, int>();
-    public Animator animator;
+    private List<CollisionInfo> pastCollisions = new List<CollisionInfo>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -53,13 +55,13 @@ public class Character : MonoBehaviour
         }
     }
 
-    float UpdateHorizontal(float hInput) {
+    public float UpdateHorizontal(float hInput) {
         float hMvmt = hInput * moveSpeed;
         if (midair) hMvmt *= airPenalty;
         return hMvmt;
     }
 
-    float UpdateVertical() {
+    public float UpdateVertical() {
         float vMvmt = 0f;
 
         if (midair) {
@@ -78,52 +80,79 @@ public class Character : MonoBehaviour
 
     }
 
-    IEnumerator MoveCharacter(Vector3 movement){
+    public IEnumerator MoveCharacter(Vector3 movement){
         transform.position += movement;
         yield return null;
     }
 
-    //entering collision: block movement in collision direction
-    void OnTriggerEnter(Collider other) {
+    // Data structure to store collision information
+    private struct CollisionInfo
+    {
+        public string objectName;
+        public int direction;
 
-        //check collisions by examining each corner of character and other object
+        public CollisionInfo(string name, int dir)
+        {
+            objectName = name;
+            direction = dir;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
         BoxCollider otherBox = other.gameObject.GetComponent<BoxCollider>();
-        int collisionDirection = CheckCollisionDirection(GetComponent<BoxCollider>(), otherBox); 
-        //0 = top, 1 = bottom, 2 = right, 3 = left;
-        //Debug.Log(collisionDirection);
-        //contact above, below, left, and right
-        if (collisionDirection >= 0) movementBlocked[collisionDirection] += 1;
+        int collisionDirection = CheckCollisionDirection(GetComponent<BoxCollider>(), otherBox);
 
-        //landing on ground
-        if (collisionDirection == 1) {
+        if (collisionDirection >= 0)
+        {
+            movementBlocked[collisionDirection] += 1;
+        }
+
+        if (collisionDirection == 1)
+        {
             midair = false;
             fallTime = 0;
         }
-
-        //hitting ceiling
-        else if (collisionDirection == 0) {
+        
+        if (collisionDirection == 0)
+        {
             jumpTime = 0;
         }
 
         RemoveOverlap(collisionDirection, GetComponent<BoxCollider>(), otherBox);
 
-        //store collision info for exit function
-        pastCollisions.Add(other.name, collisionDirection);
+        // Store collision info in the list
+        pastCollisions.Add(new CollisionInfo(other.name, collisionDirection));
     }
 
-    //exiting collision: restore movement
-    void OnTriggerExit(Collider other) {
-        int direction = pastCollisions[other.name];
-        movementBlocked[direction] -= 1;
-        pastCollisions.Remove(other.name);
+void OnTriggerExit(Collider other)
+{
+    // Find and remove the corresponding collision info from the list
+    string objectName = other.name;
+    int direction = -1; // Initialize with an invalid value
 
-        //walking off ledge
-        if (direction == 1) {
-            midair = true;
-            if (jumpTime <= 0) fallTime = 0.5f;
-            else fallTime = 0;
+    for (int i = 0; i < pastCollisions.Count; i++)
+    {
+        if (pastCollisions[i].objectName == objectName)
+        {
+            direction = pastCollisions[i].direction;
+            pastCollisions.RemoveAt(i);
+            break;
         }
     }
+
+    if (direction >= 0)
+    {
+        movementBlocked[direction] -= 1;
+    }
+
+    if (direction == 1)
+    {
+        midair = true;
+        if (jumpTime <= 0) fallTime = 0.5f;
+        else fallTime = 0;
+    }
+}
 
     private int CheckCollisionDirection(BoxCollider self, BoxCollider other) {
         //0 = top, 1 = bottom, 2 = right, 3 = left
