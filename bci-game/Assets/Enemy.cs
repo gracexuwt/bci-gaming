@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    public float attackRange = 3f; 
+    public float attackRange = 1f; 
     public int attackDamage = 10; 
-    public float attackCooldown = 2f; 
+    public float attackCooldown = 1f; 
     public Transform frontCheck; 
     public LayerMask playerLayer; 
     public int walkTime = 5;
@@ -60,7 +60,7 @@ public class Enemy : Character
 
         StartCoroutine(MoveCharacter(new Vector3(hChange, vChange, 0)));
 
-        if (canAttack && IsPlayerInAttackRange())
+        if (IsPlayerInAttackRange())
         {
             PerformAttack();
         }
@@ -77,22 +77,28 @@ public class Enemy : Character
         }
     }
 
+
     void PerformAttack()
     {
-        if (IsPlayerInAttackRange())
+        if (canAttack)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+            canAttack = false; // Set to false to prevent further attacks during cooldown
+            Collider[] hitColliders = Physics.OverlapSphere(frontCheck.position, attackRange);
+
             foreach (var hitCollider in hitColliders)
             {
+
                 if (hitCollider.CompareTag("Player"))
                 {
                     Player player = hitCollider.GetComponent<Player>();
                     Debug.Log("PLAYER HIT");
                     animator.SetTrigger("banditAttack");
-                    break;
+                    StartCoroutine(AttackCooldown());
+                    break; // Exit the loop as soon as a player is found
                 }
             }
         }
+
     }
 
     public override float[] GetInput()
@@ -102,12 +108,13 @@ public class Enemy : Character
         else
             return new float[] { -1, 0 }; 
     }
+
     public bool IsPlayerInAttackRange()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(frontCheck.position, attackRange, playerLayer);
+        Collider[] hitColliders = Physics.OverlapSphere(frontCheck.position, attackRange);
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.gameObject.CompareTag("Player"))
+            if (hitCollider.CompareTag("Player"))
             {
                 return true;
             }
