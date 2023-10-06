@@ -78,7 +78,7 @@ public class Character : MonoBehaviour
 
     }
 
-    IEnumerator MoveCharacter(Vector3 movement){
+    protected virtual IEnumerator MoveCharacter(Vector3 movement){
         transform.position += movement;
         yield return null;
     }
