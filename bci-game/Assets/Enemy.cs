@@ -82,7 +82,8 @@ public class Enemy : Character
     {
         if (canAttack)
         {
-            canAttack = false; // Set to false to prevent further attacks during cooldown
+            StartCoroutine(AttackCooldown()); // prevent further attacks during cooldown
+            animator.SetTrigger("banditAttack");
             Collider[] hitColliders = Physics.OverlapSphere(frontCheck.position, attackRange);
 
             foreach (var hitCollider in hitColliders)
@@ -92,8 +93,6 @@ public class Enemy : Character
                 {
                     Player player = hitCollider.GetComponent<Player>();
                     Debug.Log("PLAYER HIT");
-                    animator.SetTrigger("banditAttack");
-                    StartCoroutine(AttackCooldown());
                     break; // Exit the loop as soon as a player is found
                 }
             }
