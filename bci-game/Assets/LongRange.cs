@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Character
+public class LongRange : Character
 {
     public float attackRange = 1f; 
     public int attackDamage = 10; 
@@ -81,7 +81,7 @@ public class Enemy : Character
         if (canAttack)
         {
             StartCoroutine(AttackCooldown()); // prevent further attacks during cooldown
-            animator.SetTrigger("banditAttack");
+            animator.SetTrigger("cowboyShoot");
             Collider[] hitColliders = Physics.OverlapSphere(frontCheck.position, attackRange);
 
             foreach (var hitCollider in hitColliders)
@@ -90,7 +90,7 @@ public class Enemy : Character
                 if (hitCollider.CompareTag("Player"))
                 {
                     Player player = hitCollider.GetComponent<Player>();
-                    Debug.Log("PLAYER HIT");
+                    Debug.Log("PLAYER HIT LOOONG");
                     break; // Exit the loop as soon as a player is found
                 }
             }
