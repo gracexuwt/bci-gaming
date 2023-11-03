@@ -9,7 +9,7 @@ public class playerHealth : Player
     public float health;
     public float maxHealth;
     public Image filling;
-    public Animator animator; 
+    //public Animator animator; 
 
     // Start is called before the first frame update
     void Start()
