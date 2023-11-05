@@ -358,7 +358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687616145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5556, y: 0.14, z: 0}
+  m_LocalPosition: {x: 8.25, y: 0.14, z: 0}
   m_LocalScale: {x: 1.1056, y: 1.1056, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -385,14 +385,14 @@ MonoBehaviour:
   jumpDuration: 0.75
   movementBlocked: 00000000000000000000000000000000
   animator: {fileID: 0}
-  attackRange: 1
+  attackRange: 5
   attackDamage: 10
   attackCooldown: 1
   frontCheck: {fileID: 2035924924}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
-  walkTime: 5
+    m_Bits: 64
+  playerTransform: {fileID: 1200090895}
 --- !u!212 &687616151
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1241,7 +1241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035924923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.26, y: 1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
