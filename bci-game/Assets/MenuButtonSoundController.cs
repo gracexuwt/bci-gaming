@@ -3,13 +3,13 @@ using UnityEngine.EventSystems;
 
 public class MenuButtonSoundController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    // Audio source attached to menu
-    public AudioSource audioSource;
+    [Header("Audio Source")]
+    [SerializeField] private AudioSource audioSource;
     
-    // Audio clips for menu buttons
-    public AudioClip selectSound;
-    public AudioClip deselectSound;
-    public AudioClip clickSound;
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip selectSound;
+    [SerializeField] private AudioClip deselectSound;
+    [SerializeField] private AudioClip clickSound;
     
     // Button selected
     public void OnPointerEnter(PointerEventData eventData)
