@@ -3,32 +3,32 @@ using Random = UnityEngine.Random;
 
 public class CharacterSoundController : MonoBehaviour
 {
-    // Audio source attached to character self
-    private AudioSource _audioSource;
+    private AudioSource audioSource;
 
-    // Timers and intervals of repeated audio clips
-    public float footstepInterval = 0.4f;
-    private float _footstepTimer;
+    private float footstepTimer;
     
-    // Audio clips for character
-    public AudioClip[] footstepSounds;
-    public AudioClip jumpSound;
-    public AudioClip landSound;
-    public AudioClip hurtSound;
-    public AudioClip deathSound;
-    public AudioClip meleeAttackSound;
-    public AudioClip rangeAttackSound;
-    public AudioClip pickupCoinSound;
+    [Header("Timed Intervals")] 
+    [SerializeField] private float footstepInterval = 0.4f;
+    
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip[] footstepSounds;
+    [SerializeField] private AudioClip[] jumpSounds;
+    [SerializeField] private AudioClip[] landSounds;
+    [SerializeField] private AudioClip[] hurtSounds;
+    [SerializeField] private AudioClip[] deathSounds;
+    [SerializeField] private AudioClip[] meleeAttackSounds;
+    [SerializeField] private AudioClip[] rangeAttackSounds;
+    [SerializeField] private AudioClip[] pickupCoinSounds;
     
     void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         // Increment footstep timer
-        _footstepTimer += Time.deltaTime;
+        footstepTimer += Time.deltaTime;
     }
 
     /**
@@ -37,23 +37,27 @@ public class CharacterSoundController : MonoBehaviour
     public void PlayFootstepSound()
     {
         if (footstepSounds.Length == 0) return;
-        if (_footstepTimer < footstepInterval) return;
+        if (footstepTimer < footstepInterval) return;
 
         // Reset footstep timer
-        _footstepTimer = 0f;
+        footstepTimer = 0f;
             
-        AudioClip randomFootstep = footstepSounds[Random.Range(0, footstepSounds.Length)];
-        _audioSource.PlayOneShot(randomFootstep);
+        AudioClip randomFootstepSound = footstepSounds[Random.Range(0, footstepSounds.Length)];
+        audioSource.PlayOneShot(randomFootstepSound);
     }
     
     public void PlayJumpSound()
     {
-        _audioSource.PlayOneShot(jumpSound, 0.5f);
+        if (jumpSounds.Length == 0) return;
+        AudioClip randomJumpSound = jumpSounds[Random.Range(0, jumpSounds.Length)];
+        audioSource.PlayOneShot(randomJumpSound, 0.5f);
     }
     
     public void PlayLandSound()
     {
-        _audioSource.PlayOneShot(landSound);
+        if (landSounds.Length == 0) return;
+        AudioClip randomLandSound = landSounds[Random.Range(0, landSounds.Length)];
+        audioSource.PlayOneShot(randomLandSound);
     }
     
     /**
@@ -61,22 +65,30 @@ public class CharacterSoundController : MonoBehaviour
      */
     public void PlayHurtSound()
     {
-        _audioSource.PlayOneShot(hurtSound);
+        if (hurtSounds.Length == 0) return;
+        AudioClip randomHurtSound = hurtSounds[Random.Range(0, hurtSounds.Length)];
+        audioSource.PlayOneShot(randomHurtSound);
     }
     
     public void PlayDeathSound()
     {
-        _audioSource.PlayOneShot(deathSound);
+        if (deathSounds.Length == 0) return;
+        AudioClip randomDeathSound = deathSounds[Random.Range(0, deathSounds.Length)];
+        audioSource.PlayOneShot(randomDeathSound);
     }
 
     public void PlayMeleeAttackSound()
     {
-        _audioSource.PlayOneShot(meleeAttackSound);
+        if (meleeAttackSounds.Length == 0) return;
+        AudioClip randomMeleeAttackSound = meleeAttackSounds[Random.Range(0, meleeAttackSounds.Length)];
+        audioSource.PlayOneShot(randomMeleeAttackSound);
     }
     
     public void PlayRangeAttackSound()
     {
-        _audioSource.PlayOneShot(rangeAttackSound);
+        if (rangeAttackSounds.Length == 0) return;
+        AudioClip randomRangeAttackSound = rangeAttackSounds[Random.Range(0, rangeAttackSounds.Length)];
+        audioSource.PlayOneShot(randomRangeAttackSound);
     }
 
     /**
@@ -84,6 +96,8 @@ public class CharacterSoundController : MonoBehaviour
      */
     public void PlayPickupCoinSound()
     {
-        _audioSource.PlayOneShot(pickupCoinSound);
+        if (pickupCoinSounds.Length == 0) return;
+        AudioClip randomPickupCoinSound = pickupCoinSounds[Random.Range(0, pickupCoinSounds.Length)];
+        audioSource.PlayOneShot(randomPickupCoinSound);
     }
 }
