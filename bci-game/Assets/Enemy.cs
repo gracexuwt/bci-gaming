@@ -23,13 +23,11 @@ public class Enemy : Character
 
     }
 
-    // // Start is called before the first frame update
     // void Start()
     // {
     //     StartCoroutine(AttackCooldown());
     // }
 
-    // Update is called once per frame
     void Update()
     {
         float[] inputs = GetInput();
@@ -66,7 +64,7 @@ public class Enemy : Character
         }
     }
 
-    IEnumerator AttackCooldown()
+    public IEnumerator AttackCooldown()
     {
         while (true)
         {
