@@ -2016,6 +2016,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 187578441377706478, guid: 6cee38eeca750f3468691a239a03a66d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 187578441377706483, guid: 6cee38eeca750f3468691a239a03a66d, type: 3}
       propertyPath: m_RootOrder
       value: 4
