@@ -39,6 +39,7 @@ public class Heal : MonoBehaviour
     public void HealPlayer (GameObject consumeObject)
     {
         pHealth.health += heal;
+        Vector3 pos = consumeObject.transform.position;
         Destroy(consumeObject);
     }
 }

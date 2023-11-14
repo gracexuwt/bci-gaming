@@ -8,60 +8,77 @@ public class generateFruit : MonoBehaviour
     public Sprite[] spriteList;
     [SerializeField]
     public GameObject[] platforms;
+    public float delayBetweenFruits = 4.0f;
+
+    private float lastFruitSpawnTime;
+    
     // Start is called before the first frame update
     void Start()
     {
         spriteList = Resources.LoadAll<Sprite>("Fruits");
         platforms = GameObject.FindGameObjectsWithTag("Platform");
+        lastFruitSpawnTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
         GameObject[] fruits = GameObject.FindGameObjectsWithTag("Fruit");
-        // if (fruits.Length < 3)
-        //    StartCoroutine(ReplaceFruits(fruits.Length));
-
+        
         foreach (var fruit in fruits)
         {
             if (fruit.GetComponent<healAnim>() == null)
                 fruit.AddComponent<healAnim>();
         }
+
+        if (fruits.Length < 3 && Time.time - lastFruitSpawnTime >= delayBetweenFruits)
+        {
+            ReplaceFruits();
+            lastFruitSpawnTime = Time.time;
+        }
     }
 
-    /*IEnumerator ReplaceFruits(int fruits)
+    void ReplaceFruits()
     {
-        yield return new WaitForSeconds(4);
-        while (fruits < 3)
+       foreach (var p in platforms)
         {
-            fruits = GameObject.FindGameObjectsWithTag("Fruit").Length;
-            Vector3 fruitPosition = new Vector3(0, 0, 0);
-            var gameObject = new GameObject();
-            foreach (var p in platforms)
+            if (!isFruitPresent(p))
             {
-                Collider[] colliders = Physics.OverlapSphere(p.transform.position, 1f);
-                bool fruitPresent = false;
-                fruitPosition = p.transform.position;
-                fruitPosition.y += 1f;
-                foreach (var collider in colliders)
-                {
-                    if (collider.gameObject.CompareTag("Fruit") && !collider.gameObject.CompareTag("Player")) fruitPresent = true;
-                }
+                GameObject gameObject = new GameObject();
+                Vector3 fruitPosition = p.transform.position;
+                fruitPosition.y += 1.0f;
+                gameObject.transform.position = fruitPosition;
+                gameObject.name = "Fruit X";
+                gameObject.tag = "Fruit";
+                var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+                var boxCollider = gameObject.AddComponent<BoxCollider>();
+                boxCollider.isTrigger = true;
+                var rigidBody = gameObject.AddComponent<Rigidbody>();
+                rigidBody.isKinematic = true;
+                var sprite = spriteList[Random.Range(0, spriteList.Length)];
+                spriteRenderer.sprite = sprite;
 
-                if (!fruitPresent)
-                {
-                    break;
-                }
             }
-            gameObject.transform.position = fruitPosition;
-            gameObject.name = "Fruit " + (fruits + 1);
-            var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-            var boxCollider = gameObject.AddComponent<BoxCollider>();
-            boxCollider.isTrigger = true;
-            var rigidBody = gameObject.AddComponent<Rigidbody>();
-            rigidBody.isKinematic = true;
-            var sprite = spriteList[Random.Range(0, spriteList.Length)];
-            spriteRenderer.sprite = sprite;
         }
-    }*/
+    }
+
+    bool isFruitPresent(GameObject platform)
+    {
+        Collider[] colliders = Physics.OverlapSphere(platform.transform.position, 1.1f);
+        bool hasFruit = false;
+        bool hasPlayer = false;
+        foreach (var collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("Fruit"))
+            {
+                hasFruit = true;
+            }
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                hasPlayer = true;
+            }
+        }
+
+        return hasFruit || hasPlayer;
+    }
 }
