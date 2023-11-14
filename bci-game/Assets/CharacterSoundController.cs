@@ -1,6 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(AudioSource))]
 public class CharacterSoundController : MonoBehaviour
 {
     private AudioSource audioSource;
@@ -20,7 +21,7 @@ public class CharacterSoundController : MonoBehaviour
     [SerializeField] private AudioClip[] rangeAttackSounds;
     [SerializeField] private AudioClip[] pickupCoinSounds;
     
-    void Start()
+    void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }
