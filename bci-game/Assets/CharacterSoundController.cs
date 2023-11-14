@@ -21,6 +21,16 @@ public class CharacterSoundController : MonoBehaviour
     [SerializeField] private AudioClip[] rangeAttackSounds;
     [SerializeField] private AudioClip[] pickupCoinSounds;
     
+    [Header("Volume")]
+    [SerializeField, Range(0.0f, 1.0f)] private float footstepVolume = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] private float jumpVolume = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] private float landVolume = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] private float hurtVolume = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] private float deathVolume = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] private float meleeAttackVolume = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] private float rangeAttackVolume = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] private float pickupCoinVolume = 1.0f;
+    
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -44,21 +54,21 @@ public class CharacterSoundController : MonoBehaviour
         footstepTimer = 0f;
             
         AudioClip randomFootstepSound = footstepSounds[Random.Range(0, footstepSounds.Length)];
-        audioSource.PlayOneShot(randomFootstepSound);
+        audioSource.PlayOneShot(randomFootstepSound, footstepVolume);
     }
     
     public void PlayJumpSound()
     {
         if (jumpSounds.Length == 0) return;
         AudioClip randomJumpSound = jumpSounds[Random.Range(0, jumpSounds.Length)];
-        audioSource.PlayOneShot(randomJumpSound, 0.5f);
+        audioSource.PlayOneShot(randomJumpSound, jumpVolume);
     }
     
     public void PlayLandSound()
     {
         if (landSounds.Length == 0) return;
         AudioClip randomLandSound = landSounds[Random.Range(0, landSounds.Length)];
-        audioSource.PlayOneShot(randomLandSound);
+        audioSource.PlayOneShot(randomLandSound, landVolume);
     }
     
     /**
@@ -68,28 +78,28 @@ public class CharacterSoundController : MonoBehaviour
     {
         if (hurtSounds.Length == 0) return;
         AudioClip randomHurtSound = hurtSounds[Random.Range(0, hurtSounds.Length)];
-        audioSource.PlayOneShot(randomHurtSound);
+        audioSource.PlayOneShot(randomHurtSound, hurtVolume);
     }
     
     public void PlayDeathSound()
     {
         if (deathSounds.Length == 0) return;
         AudioClip randomDeathSound = deathSounds[Random.Range(0, deathSounds.Length)];
-        audioSource.PlayOneShot(randomDeathSound);
+        audioSource.PlayOneShot(randomDeathSound, deathVolume);
     }
 
     public void PlayMeleeAttackSound()
     {
         if (meleeAttackSounds.Length == 0) return;
         AudioClip randomMeleeAttackSound = meleeAttackSounds[Random.Range(0, meleeAttackSounds.Length)];
-        audioSource.PlayOneShot(randomMeleeAttackSound);
+        audioSource.PlayOneShot(randomMeleeAttackSound, meleeAttackVolume);
     }
     
     public void PlayRangeAttackSound()
     {
         if (rangeAttackSounds.Length == 0) return;
         AudioClip randomRangeAttackSound = rangeAttackSounds[Random.Range(0, rangeAttackSounds.Length)];
-        audioSource.PlayOneShot(randomRangeAttackSound);
+        audioSource.PlayOneShot(randomRangeAttackSound, rangeAttackVolume);
     }
 
     /**
@@ -99,6 +109,6 @@ public class CharacterSoundController : MonoBehaviour
     {
         if (pickupCoinSounds.Length == 0) return;
         AudioClip randomPickupCoinSound = pickupCoinSounds[Random.Range(0, pickupCoinSounds.Length)];
-        audioSource.PlayOneShot(randomPickupCoinSound);
+        audioSource.PlayOneShot(randomPickupCoinSound, pickupCoinVolume);
     }
 }

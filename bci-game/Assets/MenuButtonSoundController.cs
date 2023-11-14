@@ -11,24 +11,29 @@ public class MenuButtonSoundController : MonoBehaviour, IPointerEnterHandler, IP
     [SerializeField] private AudioClip deselectSound;
     [SerializeField] private AudioClip clickSound;
     
+    [Header("Volume")]
+    [SerializeField, Range(0f, 1f)] private float selectVolume = 1f;
+    [SerializeField, Range(0f, 1f)] private float deselectVolume = 1f;
+    [SerializeField, Range(0f, 1f)] private float clickVolume = 1f;
+    
     // Button selected
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (selectSound == null) return;
-        audioSource.PlayOneShot(selectSound, 0.5f);
+        audioSource.PlayOneShot(selectSound, selectVolume);
     }
     
     // Button deselected
     public void OnPointerExit(PointerEventData eventData)
     {
         if (deselectSound == null) return;
-        audioSource.PlayOneShot(deselectSound, 0.5f);
+        audioSource.PlayOneShot(deselectSound, deselectVolume);
     }
     
     // Button clicked
     public void OnPointerClick(PointerEventData eventData)
     {
         if (clickSound == null) return;
-        audioSource.PlayOneShot(clickSound, 1.0f);
+        audioSource.PlayOneShot(clickSound, clickVolume);
     }
 }
