@@ -66,13 +66,10 @@ public class Enemy : Character
 
     public IEnumerator AttackCooldown()
     {
-        while (true)
-        {
-            canAttack = false;
-            yield return new WaitForSeconds(attackCooldown);
-            canAttack = true;
-            yield return null;
-        }
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+        yield return null;
     }
 
 
