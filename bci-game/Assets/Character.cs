@@ -12,6 +12,8 @@ public class Character : MonoBehaviour
     public bool isAlive = true;
     public int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
     public Animator animator;
+    
+    private CharacterSoundController soundController;
 
     private bool isFacingRight = true; //tracks if character is facing right
     private bool midair = false;
@@ -24,6 +26,7 @@ public class Character : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        soundController = GetComponent<CharacterSoundController>();
     }
 
     // Update is called once per frame
@@ -51,6 +54,10 @@ public class Character : MonoBehaviour
             if (inputs[0] != 0) {
                 animator.SetFloat("X", inputs[0]+0.5F);
                 animator.SetBool("IsWalking", true);
+                if (!midair)
+                {
+                    soundController.PlayFootstepSound();
+                }
             } else {
                 animator.SetBool("IsWalking", false);
             }
@@ -300,6 +307,7 @@ void OnTriggerExit(Collider other)
         midair = true;
         jumpTime = jumpDuration;
         animator.SetTrigger("takeoff");
+        soundController.PlayJumpSound();
     }
 
     
