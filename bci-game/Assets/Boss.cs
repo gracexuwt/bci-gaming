@@ -8,18 +8,51 @@ public class Boss : Character
     public float attackRange = 3.0f;
     public float attackCooldown = 2.0f;
     public Transform target; // The player or target the boss will attack
+    public int walkTime = 5;
+    public Camera mainCamera;
+    private float minX, maxX, minY, maxY;
 
     private bool isAttacking = false;
+    private bool facingRight = true; 
+    private Vector3 startPosition; 
 
     private void Start()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+        CalculateCameraBounds();
         // Initialize other components and variables as needed.
     }
 
     private void Update()
     {
+        float[] inputs = GetInput();
+
+        float hChange = UpdateHorizontal(inputs[0]) * Time.deltaTime;
+
+        // Check if the character has moved past a certain distance and flip if needed.
+        if (Mathf.Abs(transform.position.x - startPosition.x) >= walkTime)
+        {
+            Flip();
+        }
+
+        if (hChange > 0 && movementBlocked[2] > 0)
+        {
+            hChange = 0;
+            Flip();
+        }
+        else if (hChange < 0 && movementBlocked[3] > 0)
+        {
+            hChange = 0;
+            Flip();
+        }
+
+        float vChange = UpdateVertical() * Time.deltaTime;
+        // if (vChange > 0 && movementBlocked[0] > 0) vChange = 0;
+        // else if (vChange < 0 && movementBlocked[1] > 0) vChange = 0;
+
+        StartCoroutine(MoveCharacter(new Vector3(hChange, vChange, 0)));
+
         if (currentHealth <= 0)
         {
             Die();
@@ -39,10 +72,28 @@ public class Boss : Character
         }
     }
 
-    private void MoveTowardsTarget()
+    void CalculateCameraBounds()
     {
-        // Implement code to move the boss towards the target here.
-        // You can use Vector3.MoveTowards or a similar method.
+        if (mainCamera.orthographic)
+        {
+            float cameraHalfWidth = mainCamera.orthographicSize * mainCamera.aspect;
+            float cameraHalfHeight = mainCamera.orthographicSize;
+
+            minX = -cameraHalfWidth;
+            maxX = cameraHalfWidth;
+            minY = -cameraHalfHeight;
+            maxY = cameraHalfHeight;
+        }
+        else
+        {
+            // Calculate bounds for perspective camera (not shown in this example)
+            // You may need to use additional information like camera field of view, distance, etc.
+        }
+    }
+
+   private void MoveTowardsTarget()
+    {
+
     }
 
     private IEnumerator Attack()
@@ -61,6 +112,22 @@ public class Boss : Character
     {
         // Implement code for boss's death, like playing a death animation, spawning loot, etc.
         // You might want to destroy or deactivate the boss object after a death animation.
+    }
+
+    public override float[] GetInput()
+    {
+        if (facingRight)
+            return new float[] { 1, 0 }; 
+        else
+            return new float[] { -1, 0 }; 
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0f, 180f, 0f);
+        startPosition = transform.position; // Update the starting position
+
     }
 }
 
