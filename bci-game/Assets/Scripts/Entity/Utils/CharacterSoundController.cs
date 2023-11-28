@@ -1,8 +1,8 @@
-using UnityEngine;
-using Random = UnityEngine.Random;
-
 namespace Entity.Utils
 {
+    using UnityEngine;
+    using Random = UnityEngine.Random;
+
     [RequireComponent(typeof(AudioSource))]
     public class CharacterSoundController : MonoBehaviour
     {

@@ -1,10 +1,8 @@
-using Entity.Interfaces;
-using Entity.Utils;
-using Unity.VisualScripting;
-using UnityEngine;
-
 namespace Entity.Player
 {
+    using UnityEngine;
+    using Entity.Utils;
+
     public class PlayerMovement : CharacterMovementController
     {
         [Space]
@@ -22,8 +20,9 @@ namespace Entity.Player
         {
             base.Update(); 
             
-            animator.SetFloat(Facing, body.velocity.x + 0.50F);
-            animator.SetBool(Walking, body.velocity.x != 0f);
+            // Animations and sound
+            animator.SetFloat(Facing, body.velocity.x + 0.5f);
+            animator.SetBool(Walking, Mathf.Abs(body.velocity.x) > 0.2f);
             animator.SetBool(Jumping, Mathf.Abs(body.velocity.y) > 0.2f);
             
             if (onGround && Mathf.Abs(body.velocity.x) > 0.2f)

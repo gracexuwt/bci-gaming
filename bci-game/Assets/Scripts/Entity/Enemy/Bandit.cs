@@ -1,7 +1,7 @@
-using UnityEngine;
-
 namespace Entity.Enemy
 {
+    using UnityEngine;
+
     [RequireComponent(typeof(BanditMovement))]
     public class Bandit : MonoBehaviour
     {

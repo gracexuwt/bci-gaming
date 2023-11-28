@@ -1,10 +1,10 @@
-using Entity.Interfaces;
-using UnityEngine;
-
 namespace Entity.Player
 {
+    using UnityEngine;
+    using Entity.Interfaces;
+
     [RequireComponent(typeof(PlayerMovement))]
-    public class Player : MonoBehaviour, IPosition
+    public class Player : MonoBehaviour, IPositionTrackable
     {   
         private PlayerMovement playerMovement;
         
