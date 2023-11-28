@@ -1,8 +1,8 @@
-using UnityEngine;
-
 namespace Entity.Interfaces
 {
-    public interface IPosition
+    using UnityEngine;
+
+    public interface IPositionTrackable
     {
         Vector2 GetPosition();
     }

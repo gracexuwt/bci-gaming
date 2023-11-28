@@ -1,8 +1,8 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
-
 namespace Game.Menu
 {
+    using UnityEngine;
+    using UnityEngine.EventSystems;
+
     public class MenuButtonSoundController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         [Header("Audio Source")]

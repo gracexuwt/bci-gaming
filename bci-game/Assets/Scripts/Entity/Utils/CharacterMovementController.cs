@@ -1,10 +1,10 @@
 // Credits to Shinjingi for the base character controller code:
 //    - (11/23) https://github.com/Shinjingi/Unity2D-Platform-Character-Controller
 
-using UnityEngine;
-
 namespace Entity.Utils
 {
+    using UnityEngine;
+
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CharacterSoundController))]
     [RequireComponent(typeof(Animator))]
@@ -16,7 +16,7 @@ namespace Entity.Utils
         
         [Header("Movement Parameters")]
         [SerializeField, Range(1f, 10f)] protected float maxSpeed = 6.0f;
-        [SerializeField, Range(10f, 100f)] protected float maxAcceleration = 50f;
+        [SerializeField, Range(1f, 100f)] protected float maxAcceleration = 60f;
         [SerializeField, Range(0f, 100f)] protected float maxAirAcceleration = 30f;
         [SerializeField, Range(4f, 12f)] protected float jumpForce = 8.0f;
         [SerializeField, Range(1f, 10f)] protected float risingGravityScale = 2.7f;
