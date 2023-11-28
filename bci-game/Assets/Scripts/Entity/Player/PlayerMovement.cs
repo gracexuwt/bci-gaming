@@ -21,7 +21,7 @@ namespace Entity.Player
             base.Update(); 
             
             // Animations and sound
-            animator.SetFloat(Facing, body.velocity.x + 0.5f);
+            animator.SetFloat(Facing, desiredVelocity.x + 0.5f);
             animator.SetBool(Walking, Mathf.Abs(body.velocity.x) > 0.2f);
             animator.SetBool(Jumping, Mathf.Abs(body.velocity.y) > 0.2f);
             
@@ -30,14 +30,23 @@ namespace Entity.Player
                 soundController.PlayFootstepSound();
             } 
         }
-        
+
         protected override void Jump()
         {
-            base.Jump();
-            animator.SetTrigger(Takeoff);
-            soundController.PlayJumpSound();
+            if (hasJumped)
+            {
+                hasJumped = false;
+                return;
+            }
             
-            // TODO: Add jump buffer
+            if (desiredVelocity.y > 0 && onGround)
+            {
+                velocity.y = jumpForce;           
+
+                animator.SetTrigger(Takeoff);
+                soundController.PlayJumpSound();
+                hasJumped = true;
+            }
         }
 
         protected override Vector2 GetMovementInput() {

@@ -18,9 +18,9 @@ namespace Entity.Utils
         [SerializeField, Range(1f, 10f)] protected float maxSpeed = 6.0f;
         [SerializeField, Range(1f, 100f)] protected float maxAcceleration = 60f;
         [SerializeField, Range(0f, 100f)] protected float maxAirAcceleration = 30f;
-        [SerializeField, Range(4f, 12f)] protected float jumpForce = 8.0f;
+        [SerializeField, Range(4f, 120f)] protected float jumpForce = 16.0f;
         [SerializeField, Range(1f, 10f)] protected float risingGravityScale = 2.7f;
-        [SerializeField, Range(1f, 10f)] protected float fallingGravityScale = 5.5f;
+        [SerializeField, Range(1f, 10f)] protected float fallingGravityScale = 6f;
 
         [Header("Ground Check")]
         [SerializeField] private LayerMask groundLayer = 1 << 3;
@@ -28,10 +28,11 @@ namespace Entity.Utils
         private ContactFilter2D groundFilter;
 
         protected bool onGround;
+        protected bool hasJumped;
     
         private Vector2 input;
-        private Vector2 velocity;
-        private Vector2 desiredVelocity;
+        protected Vector2 velocity;
+        protected Vector2 desiredVelocity;
         private float acceleration;
 
         private void Awake()
@@ -67,12 +68,11 @@ namespace Entity.Utils
             // Start movement
             velocity = body.velocity;
             
-            if (desiredVelocity.y > 0 && onGround)
-                Jump();
-        
             acceleration = onGround ? maxAcceleration : maxAirAcceleration;
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, acceleration * Time.deltaTime);
-        
+            
+            Jump();
+
             body.velocity = velocity;
         }
 
@@ -94,7 +94,17 @@ namespace Entity.Utils
 
         protected virtual void Jump()
         {
-            velocity.y += jumpForce;
+            if (hasJumped)
+            {
+                hasJumped = false;
+                return;
+            }
+            
+            if (desiredVelocity.y > 0 && onGround)
+            {
+                velocity.y = jumpForce;
+                hasJumped = true;
+            }
         }
 
         protected virtual Vector2 GetMovementInput()
