@@ -23,7 +23,7 @@ namespace Entity.Enemy
 
         private void Start()
         {
-            playerPositionTracker = FindObjectOfType<Player>() ?? throw new MissingReferenceException("Player not found");
+            playerPositionTracker = FindFirstObjectByType<Player>() ?? throw new MissingReferenceException("Player not found");
         }
 
         protected override void Update()
@@ -38,7 +38,8 @@ namespace Entity.Enemy
 
         protected override Vector2 GetMovementInput()
         {
-            if (Mathf.Abs(playerPosition.x - transform.position.x) < 8f)
+            float distanceToPlayer = Mathf.Abs(playerPosition.x - transform.position.x);
+            if (0.5 < distanceToPlayer && distanceToPlayer < 8f)
             {
                 return playerPosition.x < transform.position.x ? new Vector2 (-1f, 0) : new Vector2(1f, 0);
             }

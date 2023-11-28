@@ -556,8 +556,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 2}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.1, y: 1.4}
+  m_EdgeRadius: 0.25
 --- !u!114 &226335636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,9 +573,9 @@ MonoBehaviour:
   maxSpeed: 6
   maxAcceleration: 60
   maxAirAcceleration: 30
-  jumpForce: 8
+  jumpForce: 16
   risingGravityScale: 2.7
-  fallingGravityScale: 5.5
+  fallingGravityScale: 6
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -620,7 +620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695884968}
   m_LocalRotation: {x: -0, y: -0, z: -0.0018250458, w: 0.99999833}
-  m_LocalPosition: {x: 11.68, y: 1.75, z: 0}
+  m_LocalPosition: {x: 11.68, y: 1.24, z: 0}
   m_LocalScale: {x: 4.198121, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -731,7 +731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 756392586}
   m_LocalRotation: {x: -0, y: -0, z: -0.0018250458, w: 0.99999833}
-  m_LocalPosition: {x: 13.16, y: 5.33, z: 0}
+  m_LocalPosition: {x: 13.16, y: 4.98, z: 0}
   m_LocalScale: {x: 1.4727893, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -826,7 +826,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1180629914}
   - component: {fileID: 1180629915}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1035,7 +1035,7 @@ GameObject:
   - component: {fileID: 1596896154}
   - component: {fileID: 1596896153}
   - component: {fileID: 1596896152}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Bandit_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
