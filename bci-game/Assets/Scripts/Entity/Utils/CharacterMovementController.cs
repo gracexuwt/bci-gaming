@@ -51,10 +51,7 @@ namespace Entity.Utils
 
         protected virtual void Update()
         {
-            // if (!health.IsAlive) return;
-
             input = GetMovementInput();
-
             desiredVelocity = new Vector2(maxSpeed * input.x, input.y);
         }
 
@@ -72,8 +69,16 @@ namespace Entity.Utils
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, acceleration * Time.deltaTime);
             
             Jump();
-
+            
             body.velocity = velocity;
+
+            // Flip if switched directions (-1 is left, 1 is right)
+            transform.localScale = body.velocity.x switch
+            {
+                < 0 => new Vector3(-1, 1, 1),
+                > 0 => new Vector3(1, 1, 1),
+                _ => new Vector3(1, 1, 1)
+            };
         }
 
         private bool CheckGrounded()

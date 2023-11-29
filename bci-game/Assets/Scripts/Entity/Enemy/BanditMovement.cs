@@ -9,6 +9,8 @@ namespace Entity.Enemy
     {
         private IPositionTrackable playerPositionTracker;
         private Vector2 playerPosition;
+
+        private BoxCollider2D attackPoint;
         
         private static readonly int Facing = Animator.StringToHash("Bandit_X");
         private static readonly int Attack = Animator.StringToHash("BanditAttack");
@@ -23,7 +25,8 @@ namespace Entity.Enemy
 
         private void Start()
         {
-            playerPositionTracker = FindFirstObjectByType<Player>() ?? throw new MissingReferenceException("Player not found");
+            playerPositionTracker = FindFirstObjectByType<Player>();
+            attackPoint = transform.GetChild(0).GetComponent<BoxCollider2D>();
         }
 
         protected override void Update()
@@ -33,13 +36,13 @@ namespace Entity.Enemy
             playerPosition = playerPositionTracker.GetPosition();
             
             // Animations and sound
-            animator.SetFloat(Facing, -(body.velocity.x + 0.5f));
         }
 
         protected override Vector2 GetMovementInput()
         {
+            // Sample AI, can call an AI utils function instead
             float distanceToPlayer = Mathf.Abs(playerPosition.x - transform.position.x);
-            if (0.5 < distanceToPlayer && distanceToPlayer < 8f)
+            if (0.1 < distanceToPlayer && distanceToPlayer < 8f)
             {
                 return playerPosition.x < transform.position.x ? new Vector2 (-1f, 0) : new Vector2(1f, 0);
             }
