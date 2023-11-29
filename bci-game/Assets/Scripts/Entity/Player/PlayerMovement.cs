@@ -16,12 +16,16 @@ namespace Entity.Player
         private static readonly int Jumping = Animator.StringToHash("isJumping");
         private static readonly int Takeoff = Animator.StringToHash("takeoff");
 
+        private void Start()
+        {
+            animator.SetFloat(Facing, 1);
+        }
+
         protected override void Update()
         {
             base.Update(); 
             
             // Animations and sound
-            animator.SetFloat(Facing, desiredVelocity.x + 0.5f);
             animator.SetBool(Walking, Mathf.Abs(body.velocity.x) > 0.2f);
             animator.SetBool(Jumping, Mathf.Abs(body.velocity.y) > 0.2f);
             
