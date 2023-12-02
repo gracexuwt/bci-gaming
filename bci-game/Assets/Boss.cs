@@ -15,6 +15,9 @@ public class Boss : Character
     private bool isAttacking = false;
     private bool facingRight = true; 
     private Vector3 startPosition; 
+    public float knockbackForce = 5f;
+     private bool canFlip = true;
+    public float flipCooldown = 1.0f;
 
     private void Start()
     {
@@ -30,21 +33,34 @@ public class Boss : Character
 
         float hChange = UpdateHorizontal(inputs[0]) * Time.deltaTime;
 
-        // Check if the character has moved past a certain distance and flip if needed.
-        if (Mathf.Abs(transform.position.x - startPosition.x) >= walkTime)
-        {
-            Flip();
-        }
+        // Determine the direction to the player
+        Vector3 directionToPlayer = target.position - transform.position;
 
-        if (hChange > 0 && movementBlocked[2] > 0)
+        if (canFlip)
         {
-            hChange = 0;
-            Flip();
-        }
-        else if (hChange < 0 && movementBlocked[3] > 0)
-        {
-            hChange = 0;
-            Flip();
+            if (Mathf.Abs(transform.position.x - startPosition.x) >= walkTime)
+            {
+                Flip();
+            }
+            else if (hChange > 0 && directionToPlayer.x < 0 && facingRight)
+            {
+                Flip();
+            }
+            else if (hChange < 0 && directionToPlayer.x > 0 && !facingRight)
+            {
+                Flip();
+            }
+
+            if (hChange > 0 && movementBlocked[2] > 0)
+            {
+                hChange = 0;
+                StartCoroutine(FlipCooldown());
+            }
+            else if (hChange < 0 && movementBlocked[3] > 0)
+            {
+                hChange = 0;
+                StartCoroutine(FlipCooldown());
+            }
         }
 
         float vChange = UpdateVertical() * Time.deltaTime;
@@ -63,6 +79,9 @@ public class Boss : Character
             {
                 // The boss is in range to attack the player
                 StartCoroutine(Attack());
+
+                // Apply knockback to the player
+                ApplyKnockback();
             }
             else
             {
@@ -71,6 +90,7 @@ public class Boss : Character
             }
         }
     }
+
 
     void CalculateCameraBounds()
     {
@@ -91,9 +111,25 @@ public class Boss : Character
         }
     }
 
+    private IEnumerator FlipCooldown()
+    {
+        canFlip = false;
+        yield return new WaitForSeconds(flipCooldown);
+        canFlip = true;
+    }
+
    private void MoveTowardsTarget()
     {
 
+    }
+
+    private void ApplyKnockback()
+    {
+        // Calculate the knockback direction away from the boss
+        Vector3 knockbackDirection = (target.position - transform.position).normalized;
+
+        // Apply force to the player
+        target.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
     }
 
     private IEnumerator Attack()
@@ -127,7 +163,6 @@ public class Boss : Character
         facingRight = !facingRight;
         transform.Rotate(0f, 180f, 0f);
         startPosition = transform.position; // Update the starting position
-
     }
 }
 

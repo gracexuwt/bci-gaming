@@ -28,12 +28,26 @@ public class Player : Character
         return new float[] {hInput, vInput};
     }
 
-    protected override IEnumerator MoveCharacter(Vector3 movement){
-        if (camera == null) camera = GameObject.FindWithTag("MainCamera");
-        transform.position += movement;
-        camera.transform.position += movement;
-        yield return null;
-    }
+    // protected override IEnumerator MoveCharacter(Vector3 movement){
+    //     if (camera == null) camera = GameObject.FindWithTag("MainCamera");
+    //     transform.position += movement;
+    //     camera.transform.position += movement;
+    //     yield return null;
+    // }
+
+    protected override IEnumerator MoveCharacter(Vector3 movement)
+{
+    if (camera == null) 
+        camera = GameObject.FindWithTag("MainCamera");
+
+    // Move the character in both X and Y axes
+    transform.position += movement;
+
+    // Fix the camera's position in the Y-axis while allowing movement in the X-axis
+    camera.transform.position += new Vector3(movement.x, 0f, 0f);
+
+    yield return null;
+}
 
     IEnumerator AttackCooldown()
     {
