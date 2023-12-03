@@ -9,9 +9,11 @@ public class Character : MonoBehaviour
     public float airPenalty = 0.75f; //reduction in left/right speed while midair
     public float jumpSpeed = 15f;
     public float jumpDuration = 0.75f; //seconds
+    public bool isAlive = true;
     public int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
     public Animator animator;
-
+    
+    private CharacterSoundController soundController;
 
     private bool isFacingRight = true; //tracks if character is facing right
     private bool midair = false;
@@ -24,34 +26,41 @@ public class Character : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        soundController = GetComponent<CharacterSoundController>();
     }
 
     // Update is called once per frame
     void Update()
     {   
-        //get movement inputs, LR used to determine horizontal movement, up to start jump
-        float[] inputs = GetInput();
-        if (!midair && inputs[1] > 0) {
-            Jump();
-        } 
-        
-        //get horizontal velocity and check if movement is blocked
-        float hChange = UpdateHorizontal(inputs[0]) * Time.deltaTime;
-        if (hChange > 0 && movementBlocked[2] > 0) hChange = 0;
-        else if (hChange < 0 && movementBlocked[3] > 0) hChange = 0;
+        if (isAlive) {
+            //get movement inputs, LR used to determine horizontal movement, up to start jump
+            float[] inputs = GetInput();
+            if (!midair && inputs[1] > 0) {
+                Jump();
+            } 
+            
+            //get horizontal velocity and check if movement is blocked
+            float hChange = UpdateHorizontal(inputs[0]) * Time.deltaTime;
+            if (hChange > 0 && movementBlocked[2] > 0) hChange = 0;
+            else if (hChange < 0 && movementBlocked[3] > 0) hChange = 0;
 
-        //get vertical velocity and check
-        float vChange = UpdateVertical() * Time.deltaTime;
-        if (vChange > 0 && movementBlocked[0] > 0) vChange = 0;
-        else if (vChange < 0 && movementBlocked[1] > 0) vChange = 0;
+            //get vertical velocity and check
+            float vChange = UpdateVertical() * Time.deltaTime;
+            if (vChange > 0 && movementBlocked[0] > 0) vChange = 0;
+            else if (vChange < 0 && movementBlocked[1] > 0) vChange = 0;
 
-        //update position
-        StartCoroutine(MoveCharacter(new Vector3 (hChange, vChange, 0)));
-        if (inputs[0] != 0) {
-            animator.SetFloat("X", inputs[0]+0.5F);
-            animator.SetBool("IsWalking", true);
-        } else {
-            animator.SetBool("IsWalking", false);
+            //update position
+            StartCoroutine(MoveCharacter(new Vector3 (hChange, vChange, 0)));
+            if (inputs[0] != 0) {
+                animator.SetFloat("X", inputs[0]+0.5F);
+                animator.SetBool("IsWalking", true);
+                if (!midair)
+                {
+                    soundController.PlayFootstepSound();
+                }
+            } else {
+                animator.SetBool("IsWalking", false);
+            }
         }
     }
 
@@ -298,6 +307,7 @@ void OnTriggerExit(Collider other)
         midair = true;
         jumpTime = jumpDuration;
         animator.SetTrigger("takeoff");
+        soundController.PlayJumpSound();
     }
 
     
