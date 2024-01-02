@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Entity.Utils;
 using UnityEngine;
 
 public class Character : MonoBehaviour
