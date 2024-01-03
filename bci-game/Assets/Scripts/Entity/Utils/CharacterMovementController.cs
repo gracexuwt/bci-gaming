@@ -28,13 +28,13 @@ namespace Entity.Utils
         private ContactFilter2D groundFilter;
 
         protected bool onGround;
-        protected bool hasJumped;
         
-        protected Vector2 velocity;
-        protected Vector2 desiredVelocity;
+        private Vector2 velocity;
+        private Vector2 desiredVelocity;
         private float acceleration;
         
         private Vector2 input;
+        private bool hasJumped; // Prevents double jumping on the same frame
 
         protected virtual void Awake()
         {
@@ -69,7 +69,7 @@ namespace Entity.Utils
             acceleration = onGround ? maxAcceleration : maxAirAcceleration;
 
             Walk();
-            Jump();
+            hasJumped = Jump();
             
             body.velocity = velocity;
 
@@ -78,7 +78,7 @@ namespace Entity.Utils
             {
                 < 0 => new Vector3(-1, 1, 1),
                 > 0 => new Vector3(1, 1, 1),
-                _ => new Vector3(1, 1, 1)
+                _ => transform.localScale
             };
         }
 
@@ -93,7 +93,6 @@ namespace Entity.Utils
             {
                 > 0 => risingGravityScale,
                 < 0 => fallingGravityScale,
-                0 => 1f,
                 _ => body.gravityScale
             };
         }
@@ -103,19 +102,19 @@ namespace Entity.Utils
             velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, acceleration * Time.deltaTime);
         }
         
-        protected virtual void Jump()
+        /**
+         * Returns: true if the character jumps successfully
+         */
+        protected virtual bool Jump()
         {
             if (hasJumped)
-            {
-                hasJumped = false;
-                return;
-            }
+                return false;
+            if (!onGround || desiredVelocity.y <= 0) 
+                return false;
             
-            if (desiredVelocity.y > 0 && onGround)
-            {
-                velocity.y = jumpForce;
-                hasJumped = true;
-            }
+            velocity.y = jumpForce;
+            
+            return true;
         }
 
         protected virtual Vector2 GetMovementInput()

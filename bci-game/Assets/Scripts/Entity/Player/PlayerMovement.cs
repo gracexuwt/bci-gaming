@@ -5,9 +5,9 @@ namespace Entity.Player
 
     public class PlayerMovement : CharacterMovementController
     {
-        [Header("Movement Buffers")]
-        [SerializeField, Range(0, 10)] private int preJumpBuffer = 3;
-        [SerializeField, Range(0, 10)] private int postJumpBuffer = 3;
+        // [Header("Movement Buffers")]
+        // [SerializeField, Range(0, 10)] private int preJumpBuffer = 3;
+        // [SerializeField, Range(0, 10)] private int postJumpBuffer = 3;
         
         [Header("Sounds")]
         [SerializeField] private float footstepInterval = 0.5f;
@@ -51,22 +51,15 @@ namespace Entity.Player
             }
         }
 
-        protected override void Jump()
+        protected override bool Jump()
         {
-            if (hasJumped)
-            {
-                hasJumped = false;
-                return;
-            }
-            
-            if (desiredVelocity.y > 0 && onGround)
-            {
-                velocity.y = jumpForce;
+            if (!base.Jump()) // If base jump fails, return false
+                return false;
 
-                animator.SetTrigger(Takeoff);
-                soundController.PlaySound(jumpSounds, jumpVolume);
-                hasJumped = true;
-            }
+            animator.SetTrigger(Takeoff);
+            soundController.PlaySound(jumpSounds, jumpVolume);
+            
+            return true;
         }
 
         protected override Vector2 GetMovementInput() {
