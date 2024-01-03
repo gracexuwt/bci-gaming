@@ -36,7 +36,7 @@ namespace Entity.Utils
         private Vector2 input;
         private bool hasJumped; // Prevents double jumping on the same frame
 
-        protected virtual void Awake()
+        private void Awake()
         {
             body = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
