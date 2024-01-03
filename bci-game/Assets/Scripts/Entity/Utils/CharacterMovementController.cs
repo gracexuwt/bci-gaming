@@ -4,15 +4,15 @@
 namespace Entity.Utils
 {
     using UnityEngine;
-
+    
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(CharacterSoundController))]
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(CharacterSoundController))]
     public class CharacterMovementController : MonoBehaviour
     {
         protected Rigidbody2D body;
-        protected CharacterSoundController soundController;
         protected Animator animator;
+        protected CharacterSoundController soundController;
         
         [Header("Movement Parameters")]
         [SerializeField, Range(1f, 10f)] protected float maxSpeed = 6.0f;
@@ -29,13 +29,14 @@ namespace Entity.Utils
 
         protected bool onGround;
         protected bool hasJumped;
-    
-        private Vector2 input;
+        
         protected Vector2 velocity;
         protected Vector2 desiredVelocity;
         private float acceleration;
+        
+        private Vector2 input;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             body = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
@@ -66,8 +67,8 @@ namespace Entity.Utils
             velocity = body.velocity;
             
             acceleration = onGround ? maxAcceleration : maxAirAcceleration;
-            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, acceleration * Time.deltaTime);
-            
+
+            Walk();
             Jump();
             
             body.velocity = velocity;
@@ -97,6 +98,11 @@ namespace Entity.Utils
             };
         }
 
+        protected virtual void Walk()
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, acceleration * Time.deltaTime);
+        }
+        
         protected virtual void Jump()
         {
             if (hasJumped)
