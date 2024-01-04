@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class healAnim : MonoBehaviour
+public class HealAnim : MonoBehaviour
 {
     private float y;
     // Start is called before the first frame update

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class generateFruit : MonoBehaviour
+public class GenerateFruit : MonoBehaviour
 {
     [SerializeField]
     public Sprite[] spriteList;
@@ -27,8 +27,8 @@ public class generateFruit : MonoBehaviour
         
         foreach (var fruit in fruits)
         {
-            if (fruit.GetComponent<healAnim>() == null)
-                fruit.AddComponent<healAnim>();
+            if (fruit.GetComponent<HealAnim>() == null)
+                fruit.AddComponent<HealAnim>();
         }
 
         if (fruits.Length < 3 && Time.time - lastFruitSpawnTime >= delayBetweenFruits)
@@ -42,7 +42,7 @@ public class generateFruit : MonoBehaviour
     {
        foreach (var p in platforms)
         {
-            if (!isFruitPresent(p))
+            if (!IsFruitPresent(p))
             {
                 GameObject gameObject = new GameObject();
                 Vector3 fruitPosition = p.transform.position;
@@ -62,7 +62,7 @@ public class generateFruit : MonoBehaviour
         }
     }
 
-    bool isFruitPresent(GameObject platform)
+    bool IsFruitPresent(GameObject platform)
     {
         Collider[] colliders = Physics.OverlapSphere(platform.transform.position, 1.1f);
         bool hasFruit = false;
