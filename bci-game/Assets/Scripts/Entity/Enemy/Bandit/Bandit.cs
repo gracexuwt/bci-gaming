@@ -1,4 +1,4 @@
-namespace Entity.Enemy
+namespace Entity.Enemy.Bandit
 {
     using UnityEngine;
 
