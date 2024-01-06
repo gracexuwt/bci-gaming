@@ -5,10 +5,15 @@ namespace Entity.Player
     using Entity.Utils;
 
     [RequireComponent(typeof(PlayerMovement))]
+    [RequireComponent(typeof(CharacterSoundController))]
     public class Player : MonoBehaviour, IPositionTrackable, IDamageable
     {
         private Rigidbody2D body;
         private CharacterSoundController soundController;
+        
+        [Header("Sounds")]
+        [SerializeField] private AudioClip[] hurtSounds;
+        [SerializeField, Range(0f, 1f)] private float hurtVolume = 0.8f;
         
         private void Awake()
         {
@@ -27,7 +32,7 @@ namespace Entity.Player
         {
             // health.health -= damageAmount;
             // if(health.health < 0) Die();
-            soundController.PlayHurtSound();
+            soundController.PlaySound(hurtSounds, hurtVolume);
 
             Vector2 knockback = knockbackDirection.normalized * knockbackForce;
             body.AddForce(knockback, ForceMode2D.Impulse);
