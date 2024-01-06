@@ -5,11 +5,18 @@ namespace Entity.Player
 
     public class PlayerMovement : CharacterMovementController
     {
-        [Space]
-    
-        [Header("Movement Buffers")]
-        [SerializeField, Range(0, 10)] private int preJumpBuffer = 3;
-        [SerializeField, Range(0, 10)] private int postJumpBuffer = 3;
+        // [Header("Movement Buffers")]
+        // [SerializeField, Range(0, 10)] private int preJumpBuffer = 3;
+        // [SerializeField, Range(0, 10)] private int postJumpBuffer = 3;
+        
+        [Header("Sounds")]
+        [SerializeField] private float footstepInterval = 0.5f;
+        [SerializeField] private AudioClip[] footstepSounds;
+        [SerializeField] private AudioClip[] jumpSounds;
+        [SerializeField, Range(0f, 1f)] private float footstepVolume = 0.8f;
+        [SerializeField, Range(0f, 1f)] private float jumpVolume = 0.8f;
+        
+        private float footstepTimer = 0f;
         
         private static readonly int Facing = Animator.StringToHash("X");
         private static readonly int Walking = Animator.StringToHash("IsWalking");
@@ -23,34 +30,36 @@ namespace Entity.Player
 
         protected override void Update()
         {
-            base.Update(); 
+            base.Update();
             
             // Animations and sound
             animator.SetBool(Walking, Mathf.Abs(body.velocity.x) > 0.2f);
             animator.SetBool(Jumping, Mathf.Abs(body.velocity.y) > 0.2f);
-            
-            if (onGround && Mathf.Abs(body.velocity.x) > 0.2f)
-            {
-                soundController.PlayFootstepSound();
-            } 
+
+            PlayFootstepSounds();
         }
 
-        protected override void Jump()
+        private void PlayFootstepSounds()
         {
-            if (hasJumped)
-            {
-                hasJumped = false;
-                return;
-            }
+            footstepTimer += Time.deltaTime;
             
-            if (desiredVelocity.y > 0 && onGround)
+            if (!onGround || Mathf.Abs(body.velocity.x) < 0.2f) return;
+            if (footstepTimer > footstepInterval)
             {
-                velocity.y = jumpForce;           
-
-                animator.SetTrigger(Takeoff);
-                soundController.PlayJumpSound();
-                hasJumped = true;
+                soundController.PlaySound(footstepSounds, footstepVolume);
+                footstepTimer = 0f;
             }
+        }
+
+        protected override bool Jump()
+        {
+            if (!base.Jump()) // If base jump fails, return false
+                return false;
+
+            animator.SetTrigger(Takeoff);
+            soundController.PlaySound(jumpSounds, jumpVolume);
+            
+            return true;
         }
 
         protected override Vector2 GetMovementInput() {
