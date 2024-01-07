@@ -4,15 +4,16 @@ import time
 import numpy as np
 import collections
 import pyautogui
-import pydirectinput
+# import pydirectinput
 import pandas as pd
 import matplotlib.pyplot as plt
 
 from brainflow import BoardIds
 from brainflow.board_shim import BoardShim, BrainFlowInputParams
-from brainflow.data_filter import DataFilter, FilterTypes, AggOperations, WindowFunctions
+from brainflow.data_filter import DataFilter, FilterTypes, AggOperations, WindowOperations
 
 def main ():
+
     # yaxin
     board_id = BoardIds.CROWN_BOARD.value # or BoardIds.NOTION_2_BOARD.value or BoardIds.NOTION_1_BOARD.value
     params = BrainFlowInputParams ()
@@ -29,7 +30,7 @@ def main ():
     
     board = BoardShim (board_id, params)
     board.prepare_session ()
-    
+
     board.start_stream(450000)
     print("starting calibration")
     time.sleep(5)
@@ -57,6 +58,23 @@ def main ():
 
 
     print("CALIBRATION DONE START PLAYING")
+
+    eeg_channels = BoardShim.get_eeg_channels(board_id)
+    timestamp_channel = BoardShim.get_timestamp_channel(board_id)
+    
+    # PSD calculation
+    # nfft = DataFilter.get_nearest_power_of_two(sampling_rate)
+    # eeg_channel = eeg_channels[0]
+    nfft = 256
+    fs = 250  # Sampling rate, adjust as needed
+    psd = DataFilter.get_psd_welch(data[fs], nfft, nfft // 2, sampling_rate, WindowOperations.NO_WINDOW.value)
+    
+    # Plotting before processing
+    df = pd.DataFrame(np.transpose(data))
+    plt.figure()
+    df[eeg_channels[:3]].plot(subplots=True)
+    plt.savefig("before_processing.png")
+
     prev_time = int(round(time.time() * 1000))
     
     while True:
