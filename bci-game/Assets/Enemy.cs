@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : Character
 {
     public float attackRange = 1f; 
-    public int attackDamage = 10; 
+    public float attackDamage = 10; 
     public float attackCooldown = 1f; 
     public Transform frontCheck; 
     public LayerMask playerLayer; 
@@ -23,13 +23,11 @@ public class Enemy : Character
 
     }
 
-    // // Start is called before the first frame update
     // void Start()
     // {
     //     StartCoroutine(AttackCooldown());
     // }
 
-    // Update is called once per frame
     void Update()
     {
         float[] inputs = GetInput();
@@ -66,15 +64,12 @@ public class Enemy : Character
         }
     }
 
-    IEnumerator AttackCooldown()
+    public IEnumerator AttackCooldown()
     {
-        while (true)
-        {
-            canAttack = false;
-            yield return new WaitForSeconds(attackCooldown);
-            canAttack = true;
-            yield return null;
-        }
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+        yield return null;
     }
 
 
@@ -91,7 +86,8 @@ public class Enemy : Character
 
                 if (hitCollider.CompareTag("Player"))
                 {
-                    Player player = hitCollider.GetComponent<Player>();
+                    playerHealth player = hitCollider.GetComponent<playerHealth>();
+                    player.decreaseHealth(attackDamage);
                     Debug.Log("PLAYER HIT");
                     break; // Exit the loop as soon as a player is found
                 }

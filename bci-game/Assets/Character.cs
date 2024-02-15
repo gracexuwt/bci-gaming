@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     public bool isAlive = true;
     public int[] movementBlocked = {0, 0, 0, 0}; //up, down, right, left
     public Animator animator;
-
+    
     private bool isFacingRight = true; //tracks if character is facing right
     private bool midair = false;
     private float fallTime = 0; //tracks time spent in the air
