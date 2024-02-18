@@ -23,7 +23,6 @@ public class Player : Character
     public override float[] GetInput()
     {
         float hInput = Input.GetAxis("Horizontal");
-        Debug.Log("Horizont");
         float vInput = Input.GetAxis("Vertical");
         if (hInput != 0)
         {
@@ -37,6 +36,7 @@ public class Player : Character
                 PerformAttack();
             }
         }
+       
 
         return new float[] { hInput, vInput };
     }
@@ -94,18 +94,6 @@ public class Player : Character
         playerAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Healthbar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
-
-        if (health / maxHealth <= 0 && isAlive)
-        {
-            isAlive = false;
-            playerAnimator.SetTrigger("isDead");
-            StartCoroutine(LoadSceneAfterDelay("DeathSeq", 0.6f));
-        }
-    }
 
     public void decreaseHealth(float n)
     {
@@ -137,5 +125,13 @@ public class Player : Character
             yield return null;
         }
         Healthbar.color = original;
+        Healthbar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
+
+        if (health / maxHealth <= 0 && isAlive)
+        {
+            isAlive = false;
+            playerAnimator.SetTrigger("isDead");
+            StartCoroutine(LoadSceneAfterDelay("DeathSeq", 0.6f));
+        }
     }
 }
