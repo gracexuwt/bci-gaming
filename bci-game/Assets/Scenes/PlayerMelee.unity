@@ -442,7 +442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -346.00003, y: 207.00003}
+  m_AnchoredPosition: {x: -346, y: 207}
   m_SizeDelta: {x: 202.963, y: 27.0136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &459887595
@@ -622,6 +622,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38417abb9134f741a5b1e63979c2030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  gravity: 8
+  airPenalty: 0.75
+  jumpSpeed: 15
+  jumpDuration: 0.75
+  isAlive: 1
+  movementBlocked: 00000000000000000000000000000000
+  animator: {fileID: 941190086}
+  attackRange: 1
+  attackDamage: 10
+  attackCooldown: 1
+  frontCheck: {fileID: 115962943}
+  health: 100
+  maxHealth: 0
+  Healthbar: {fileID: 0}
+  playerAnimator: {fileID: 0}
 --- !u!95 &941190086
 Animator:
   serializedVersion: 5
@@ -662,7 +678,7 @@ MonoBehaviour:
   jumpDuration: 0.75
   isAlive: 1
   movementBlocked: 00000000000000000000000000000000
-  animator: {fileID: 0}
+  animator: {fileID: 941190086}
   attackRange: 1
   attackDamage: 10
   attackCooldown: 1
@@ -670,7 +686,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 0
   Healthbar: {fileID: 459887595}
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 941190086}
 --- !u!54 &941190088
 Rigidbody:
   m_ObjectHideFlags: 0
