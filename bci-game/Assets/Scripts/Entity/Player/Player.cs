@@ -62,10 +62,7 @@ namespace Entity.Player
 
         public void Heal(float healAmount)
         {
-            Health = (Health + healAmount < MaxHealth) 
-                ? Health + healAmount 
-                : MaxHealth;
-            
+            Health = Mathf.Clamp(Health + healAmount, 0, MaxHealth);
             soundController.PlaySound(healSounds, healVolume);
         }
         
