@@ -13,8 +13,7 @@ namespace Entity.Enemies.Bandit
         private BoxCollider2D attackPoint;
         
         private static readonly int Facing = Animator.StringToHash("Bandit_X");
-        private static readonly int Attack = Animator.StringToHash("BanditAttack");
-        private static readonly int Die = Animator.StringToHash("BanditDead");
+        private static readonly int Die = Animator.StringToHash("banditDead");
 
         private void Reset()
         {
