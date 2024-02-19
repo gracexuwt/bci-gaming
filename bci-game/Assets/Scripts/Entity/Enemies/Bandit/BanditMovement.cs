@@ -1,8 +1,9 @@
+using UnityEngine;
+using Entity.Interfaces;
+using Entity.Utils;
+
 namespace Entity.Enemies.Bandit
 {
-    using UnityEngine;
-    using Entity.Interfaces;
-    using Entity.Utils;
     using Entity.Player;
     
     public class BanditMovement : CharacterMovementController
@@ -15,6 +16,8 @@ namespace Entity.Enemies.Bandit
         private BoxCollider2D attackPoint;
         
         private static readonly int Facing = Animator.StringToHash("Bandit_X");
+
+        private bool FIXED_STARTUP_MOVEMENT = false;
 
         private void Reset()
         {
@@ -33,6 +36,14 @@ namespace Entity.Enemies.Bandit
         protected override void Update()
         {
             if (!self.IsAlive) isAlive = false;
+
+            // TODO: Temporary fix for startup movement
+            // Bug still occurs occasionally when enemy is hit or stops moving, root issue not yet found
+            if (!FIXED_STARTUP_MOVEMENT && onGround)
+            {
+                body.AddForce(new Vector2(0.1f, 0.1f), ForceMode2D.Impulse);
+                FIXED_STARTUP_MOVEMENT = true;
+            }
             
             base.Update();
 
@@ -45,12 +56,12 @@ namespace Entity.Enemies.Bandit
         {
             // Sample AI, can call an AI utils function instead
             float distanceToPlayer = Mathf.Abs(playerPosition.x - transform.position.x);
-            if (0.1 < distanceToPlayer && distanceToPlayer < 8f)
+            if (distanceToPlayer is > 0.1f and < 8f)
             {
-                return playerPosition.x < transform.position.x ? new Vector2 (-1f, 0) : new Vector2(1f, 0);
+                return playerPosition.x < transform.position.x ? new Vector2 (-1f, 0f) : new Vector2(1f, 0f);
             }
 
-            return new Vector2(0, 0);
+            return new Vector2(0f, 0f);
         }
     }
 }
