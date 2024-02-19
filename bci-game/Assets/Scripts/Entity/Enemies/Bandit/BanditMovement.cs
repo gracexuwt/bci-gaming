@@ -7,13 +7,14 @@ namespace Entity.Enemies.Bandit
     
     public class BanditMovement : CharacterMovementController
     {
+        private Bandit self;
+        
         private IPositionTrackable playerPositionTracker;
         private Vector2 playerPosition;
 
         private BoxCollider2D attackPoint;
         
         private static readonly int Facing = Animator.StringToHash("Bandit_X");
-        private static readonly int Die = Animator.StringToHash("banditDead");
 
         private void Reset()
         {
@@ -24,12 +25,15 @@ namespace Entity.Enemies.Bandit
 
         private void Start()
         {
+            self = GetComponent<Bandit>();
             playerPositionTracker = FindFirstObjectByType<Player>();
             attackPoint = transform.GetChild(0).GetComponent<BoxCollider2D>();
         }
 
         protected override void Update()
         {
+            if (!self.IsAlive) isAlive = false;
+            
             base.Update();
 
             playerPosition = playerPositionTracker.GetPosition();
