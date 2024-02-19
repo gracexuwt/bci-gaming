@@ -1,5 +1,3 @@
-using System;
-
 namespace Entity.Collectables
 {
     using UnityEngine;
@@ -21,7 +19,7 @@ namespace Entity.Collectables
                 // play anim
                 
                 player.Heal(10);
-                EntityUtils.MarkForDeath(gameObject, 0);
+                EntityUtils.MarkForDeath(gameObject, 0, false);
             }
         }
     }
