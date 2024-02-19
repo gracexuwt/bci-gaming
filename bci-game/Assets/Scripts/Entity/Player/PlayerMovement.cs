@@ -5,6 +5,8 @@ namespace Entity.Player
 
     public class PlayerMovement : CharacterMovementController
     {
+        private Player player;
+        
         // [Header("Movement Buffers")]
         // [SerializeField, Range(0, 10)] private int preJumpBuffer = 3;
         // [SerializeField, Range(0, 10)] private int postJumpBuffer = 3;
@@ -25,11 +27,14 @@ namespace Entity.Player
 
         private void Start()
         {
+            player = GetComponent<Player>();
             animator.SetFloat(Facing, 1);
         }
 
         protected override void Update()
         {
+            if (!player.IsAlive) isAlive = false;
+            
             base.Update();
             
             // Animations and sound

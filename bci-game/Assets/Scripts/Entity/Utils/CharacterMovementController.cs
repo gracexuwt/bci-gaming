@@ -28,6 +28,7 @@ namespace Entity.Utils
         private ContactFilter2D groundFilter;
 
         protected bool onGround;
+        protected bool isAlive = true;
         
         private Vector2 velocity;
         private Vector2 desiredVelocity;
@@ -53,7 +54,9 @@ namespace Entity.Utils
         protected virtual void Update()
         {
             input = GetMovementInput();
-            desiredVelocity = new Vector2(maxSpeed * input.x, input.y);
+            desiredVelocity = isAlive
+                ? new Vector2(maxSpeed * input.x, input.y)
+                : Vector2.zero;
         }
 
         private void FixedUpdate()
