@@ -1,18 +1,26 @@
 namespace Entity.Utils
 {
     using System.Threading.Tasks;
+    using System;
     using UnityEngine;
     
     public static class EntityUtils
     {
-        public static async void MarkForDeath(GameObject obj, float secondsDelay, bool force = false)
+        public static void MarkForDeath(GameObject obj, float seconds, bool force = false)
         {
-            await Task.Delay(Mathf.RoundToInt(secondsDelay * 1000));
-            
-            if (force)
-                Object.Destroy(obj);
-            else
-                obj.SetActive(false);
+            Delay(seconds, () =>
+            {
+                if (force)
+                    UnityEngine.Object.Destroy(obj);
+                else
+                    obj.SetActive(false);
+            });
+        }
+
+        public static async void Delay(float seconds, Action action)
+        {
+            await Task.Delay(Mathf.RoundToInt(seconds * 1000));
+            action();
         }
     }
 }
