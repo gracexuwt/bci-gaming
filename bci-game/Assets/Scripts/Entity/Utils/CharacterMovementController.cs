@@ -1,14 +1,14 @@
 // Credits to Shinjingi for the base character controller code:
 //    - (11/23) https://github.com/Shinjingi/Unity2D-Platform-Character-Controller
 
+using UnityEngine;
+
 namespace Entity.Utils
 {
-    using UnityEngine;
-    
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CharacterSoundController))]
-    public class CharacterMovementController : MonoBehaviour
+    public abstract class CharacterMovementController : MonoBehaviour
     {
         protected Rigidbody2D body;
         protected Animator animator;
@@ -79,8 +79,8 @@ namespace Entity.Utils
             // Flip if switched directions (-1 is left, 1 is right)
             transform.localScale = body.velocity.x switch
             {
-                < 0 => new Vector3(-1, 1, 1),
-                > 0 => new Vector3(1, 1, 1),
+                < 0f => new Vector3(-1f, 1f, 1f),
+                > 0f => new Vector3(1f, 1f, 1f),
                 _ => transform.localScale
             };
         }
@@ -94,8 +94,8 @@ namespace Entity.Utils
         {
             return body.velocity.y switch
             {
-                > 0 => risingGravityScale,
-                < 0 => fallingGravityScale,
+                > 0f => risingGravityScale,
+                < 0f => fallingGravityScale,
                 _ => body.gravityScale
             };
         }
@@ -112,7 +112,7 @@ namespace Entity.Utils
         {
             if (hasJumped)
                 return false;
-            if (!onGround || desiredVelocity.y <= 0) 
+            if (!onGround || desiredVelocity.y <= 0f) 
                 return false;
             
             velocity.y = jumpForce;
