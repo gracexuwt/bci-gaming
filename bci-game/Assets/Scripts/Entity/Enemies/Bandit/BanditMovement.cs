@@ -12,8 +12,6 @@ namespace Entity.Enemies.Bandit
         
         private IPositionTrackable playerPositionTracker;
         private Vector2 playerPosition;
-
-        private BoxCollider2D attackPoint;
         
         private static readonly int Facing = Animator.StringToHash("Bandit_X");
 
@@ -30,7 +28,6 @@ namespace Entity.Enemies.Bandit
         {
             self = GetComponent<Bandit>();
             playerPositionTracker = FindFirstObjectByType<Player>();
-            attackPoint = transform.GetChild(0).GetComponent<BoxCollider2D>();
         }
 
         protected override void Update()
