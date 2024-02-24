@@ -3,6 +3,7 @@ namespace Entity.Enemies.Bandit
     using UnityEngine;
     using Entity.Interfaces;
     using Entity.Utils;
+    using Game.UI;
 
     [RequireComponent(typeof(BanditAttack))]
     [RequireComponent(typeof(BanditMovement))]
@@ -36,6 +37,7 @@ namespace Entity.Enemies.Bandit
         public bool IsAlive { get; private set; }
         public float MaxHealth => 100;
         public float Health { get; private set; }
+        
 
         public void Damage(float damageAmount, Vector2 knockbackDirection, float knockbackForce)
         {

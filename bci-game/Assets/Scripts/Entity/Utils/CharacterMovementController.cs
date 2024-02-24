@@ -46,7 +46,7 @@ namespace Entity.Utils
             // Setup ground check
             groundFilter.useLayerMask = true;
             groundFilter.useNormalAngle = true;
-            groundFilter.layerMask = groundLayer;
+            groundFilter.layerMask = LayerMask.GetMask("Ground", "Enemies");
             groundFilter.minNormalAngle = 90f - maxNormalTilt;
             groundFilter.maxNormalAngle = 90f + maxNormalTilt;
         }
