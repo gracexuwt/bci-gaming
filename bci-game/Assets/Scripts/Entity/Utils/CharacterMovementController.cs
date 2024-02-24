@@ -19,11 +19,10 @@ namespace Entity.Utils
         [SerializeField, Range(1f, 100f)] protected float maxAcceleration = 60f;
         [SerializeField, Range(0f, 100f)] protected float maxAirAcceleration = 30f;
         [SerializeField, Range(4f, 120f)] protected float jumpForce = 16.0f;
-        [SerializeField, Range(1f, 10f)] protected float risingGravityScale = 2.7f;
+        [SerializeField, Range(1f, 10f)] protected float risingGravityScale = 3f;
         [SerializeField, Range(1f, 10f)] protected float fallingGravityScale = 6f;
 
         [Header("Ground Check")]
-        [SerializeField] private LayerMask groundLayer = 1 << 3;
         [SerializeField, Range(0f, 90f)] private float maxNormalTilt = 60f;
         private ContactFilter2D groundFilter;
 
@@ -46,7 +45,7 @@ namespace Entity.Utils
             // Setup ground check
             groundFilter.useLayerMask = true;
             groundFilter.useNormalAngle = true;
-            groundFilter.layerMask = LayerMask.GetMask("Ground", "Enemies");
+            groundFilter.layerMask = LayerMask.GetMask("Enemies", "Ground"); // Allow jumping on enemies and ground
             groundFilter.minNormalAngle = 90f - maxNormalTilt;
             groundFilter.maxNormalAngle = 90f + maxNormalTilt;
         }

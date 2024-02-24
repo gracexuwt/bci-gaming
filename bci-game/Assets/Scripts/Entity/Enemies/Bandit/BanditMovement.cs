@@ -5,8 +5,7 @@ using Entity.Utils;
 namespace Entity.Enemies.Bandit
 {
     using Entity.Player;
-    using Game.UI;
-
+    
     public class BanditMovement : CharacterMovementController
     {
         private Bandit self;
@@ -15,10 +14,7 @@ namespace Entity.Enemies.Bandit
         private Vector2 playerPosition;
         
         private static readonly int Facing = Animator.StringToHash("Bandit_X");
-
-        private bool FIXED_STARTUP_MOVEMENT = false;
-
-
+        
         private void Reset()
         {
             maxSpeed = 4f;
@@ -35,14 +31,6 @@ namespace Entity.Enemies.Bandit
         protected override void Update()
         {
             if (!self.IsAlive) isAlive = false;
-
-            // TODO: Temporary fix for startup movement
-            // Bug still occurs occasionally when enemy is hit or stops moving, root issue not yet found
-            if (!FIXED_STARTUP_MOVEMENT && onGround)
-            {
-                body.AddForce(new Vector2(0.1f, 0.1f), ForceMode2D.Impulse);
-                FIXED_STARTUP_MOVEMENT = true;
-            }
             
             base.Update();
 
