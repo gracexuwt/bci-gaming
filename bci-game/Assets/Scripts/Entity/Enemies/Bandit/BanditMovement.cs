@@ -5,7 +5,8 @@ using Entity.Utils;
 namespace Entity.Enemies.Bandit
 {
     using Entity.Player;
-    
+    using Game.UI;
+
     public class BanditMovement : CharacterMovementController
     {
         private Bandit self;
@@ -16,6 +17,7 @@ namespace Entity.Enemies.Bandit
         private static readonly int Facing = Animator.StringToHash("Bandit_X");
 
         private bool FIXED_STARTUP_MOVEMENT = false;
+
 
         private void Reset()
         {
