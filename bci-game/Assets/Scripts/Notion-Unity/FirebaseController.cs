@@ -43,7 +43,17 @@ namespace Notion.Unity
 
         public async Task<FirebaseUser> Login(Device credentials)
         {
-            return await NotionAuth.SignInWithEmailAndPasswordAsync(credentials.Email, credentials.Password);
+            AuthResult authResult = await NotionAuth.SignInWithEmailAndPasswordAsync(credentials.Email, credentials.Password);
+
+            if (authResult != null)
+            {
+                return authResult.User;
+            }
+            else
+            {
+                Debug.LogError("Authentication failed.");
+                return null;
+            }
         }
 
         public void Logout()
