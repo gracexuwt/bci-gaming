@@ -15,6 +15,7 @@ namespace Entity.Utils
 
         public void PlaySound(AudioClip clip, float volume)
         {
+            if (clip == null) return;
             audioSource.PlayOneShot(clip, volume);
         }
 
