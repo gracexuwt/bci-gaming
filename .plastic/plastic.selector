@@ -1,0 +1,4 @@
+repository "bci-game@nxyzou@cloud"
+  path "/"
+    br "/main"
+    co "/main"
