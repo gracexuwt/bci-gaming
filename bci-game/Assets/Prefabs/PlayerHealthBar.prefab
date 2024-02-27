@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5690463730136326582}
   - component: {fileID: 4973434828198042810}
   m_Layer: 5
-  m_Name: HealthFiller
+  m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 60}
+  m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5690463730136326582
 CanvasRenderer:
@@ -58,15 +58,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.77254903, g: 0.25882354, b: 0.3529412, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d0ed318e448ae6c44a42ed9a51742b07, type: 3}
-  m_Type: 3
+  m_Sprite: {fileID: 21300000, guid: fe59decb9e0f41a44b355670156f2440, type: 3}
+  m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
@@ -111,8 +111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260, y: 180}
-  m_SizeDelta: {x: 200, y: 60}
+  m_AnchoredPosition: {x: -640, y: 360}
+  m_SizeDelta: {x: 400, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6359849615441472810
 CanvasRenderer:
@@ -142,11 +142,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fe59decb9e0f41a44b355670156f2440, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: d0ed318e448ae6c44a42ed9a51742b07, type: 3}
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -164,7 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c307e11c964544ff8c305c1b72710620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthFiller: {fileID: 4973434828198042810}
   healthColor: {r: 0.77254903, g: 0.25882354, b: 0.3529412, a: 1}
   flashOnDamage: 1
   flashDamageColor: {r: 1, g: 1, b: 1, a: 0.78431374}

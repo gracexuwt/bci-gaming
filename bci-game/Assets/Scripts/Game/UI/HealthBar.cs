@@ -8,7 +8,9 @@ namespace Game.UI
     
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField] private Image healthFiller;
+        // Script is attached to the fill image
+        private Image healthFiller;
+        
         [SerializeField] private Color healthColor;
         
         [Header("Damage indicator")]
@@ -24,6 +26,11 @@ namespace Game.UI
         private float maxHealth;
         private float prevHealth;
         private Player player;
+
+        private void Awake()
+        {
+            healthFiller = GetComponent<Image>();
+        }
         
         private void Start()
         {
