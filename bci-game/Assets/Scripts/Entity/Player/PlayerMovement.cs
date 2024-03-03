@@ -23,6 +23,8 @@ namespace Entity.Player
         private static readonly int Jumping = Animator.StringToHash("isJumping");
         private static readonly int Takeoff = Animator.StringToHash("takeoff");
 
+        public Transform Fire;
+
         private void Start()
         {
             animator.SetFloat(Facing, 1);
@@ -35,7 +37,9 @@ namespace Entity.Player
             // Animations and sound
             animator.SetBool(Walking, Mathf.Abs(body.velocity.x) > 0.2f);
             animator.SetBool(Jumping, Mathf.Abs(body.velocity.y) > 0.2f);
-
+            //Rotate gunpoint
+            if(body.velocity.x < 0f) Fire.rotation = Quaternion.Euler(0f, 180f, 0f);
+            if(body.velocity.x > 0f) Fire.rotation = Quaternion.Euler(0f, 0f, 0f);
             PlayFootstepSounds();
         }
 
