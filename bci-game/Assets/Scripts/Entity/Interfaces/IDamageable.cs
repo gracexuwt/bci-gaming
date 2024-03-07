@@ -4,8 +4,11 @@ namespace Entity.Interfaces
 
     public interface IDamageable
     {
-        // float Health { get; set; }
-        // void Die();
+        bool IsAlive { get; }
+        float MaxHealth { get; }
+        float Health { get; }
         void Damage(float damageAmount, Vector2 knockbackDirection, float knockbackForce);
+        void Heal(float healAmount);
+        void Die();
     }
 }

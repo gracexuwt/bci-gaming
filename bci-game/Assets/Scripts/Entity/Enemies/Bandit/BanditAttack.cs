@@ -5,9 +5,18 @@ namespace Entity.Enemies.Bandit
     
     public class BanditAttack : MonoBehaviour
     {
+        private Animator animator;
+        
         [SerializeField] private float damageAmount = 10f;
-        [SerializeField] private float knockbackForce = 7.5f;
+        [SerializeField] private float knockbackForce = 15f;
 
+        private static readonly int Attack = Animator.StringToHash("banditAttack");
+        
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
+        
         // Basic attacks
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -16,8 +25,10 @@ namespace Entity.Enemies.Bandit
                 IDamageable damageable = other.GetComponent<IDamageable>();
                 if (damageable == null) return;
                 
+                animator.SetTrigger(Attack); // TODO: Fix reversal of animation
+                
                 Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
-                knockbackDirection.y += 0.4f;
+                knockbackDirection.y += 0.8f;
                 
                 damageable.Damage(damageAmount, knockbackDirection, knockbackForce);
             }

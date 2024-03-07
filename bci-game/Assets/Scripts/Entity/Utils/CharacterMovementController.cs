@@ -1,14 +1,14 @@
 // Credits to Shinjingi for the base character controller code:
 //    - (11/23) https://github.com/Shinjingi/Unity2D-Platform-Character-Controller
 
+using UnityEngine;
+
 namespace Entity.Utils
 {
-    using UnityEngine;
-    
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CharacterSoundController))]
-    public class CharacterMovementController : MonoBehaviour
+    public abstract class CharacterMovementController : MonoBehaviour
     {
         protected Rigidbody2D body;
         protected Animator animator;
@@ -19,15 +19,15 @@ namespace Entity.Utils
         [SerializeField, Range(1f, 100f)] protected float maxAcceleration = 60f;
         [SerializeField, Range(0f, 100f)] protected float maxAirAcceleration = 30f;
         [SerializeField, Range(4f, 120f)] protected float jumpForce = 16.0f;
-        [SerializeField, Range(1f, 10f)] protected float risingGravityScale = 2.7f;
+        [SerializeField, Range(1f, 10f)] protected float risingGravityScale = 3f;
         [SerializeField, Range(1f, 10f)] protected float fallingGravityScale = 6f;
 
         [Header("Ground Check")]
-        [SerializeField] private LayerMask groundLayer = 1 << 3;
         [SerializeField, Range(0f, 90f)] private float maxNormalTilt = 60f;
         private ContactFilter2D groundFilter;
 
         protected bool onGround;
+        protected bool isAlive = true;
         
         private Vector2 velocity;
         private Vector2 desiredVelocity;
@@ -45,7 +45,7 @@ namespace Entity.Utils
             // Setup ground check
             groundFilter.useLayerMask = true;
             groundFilter.useNormalAngle = true;
-            groundFilter.layerMask = groundLayer;
+            groundFilter.layerMask = LayerMask.GetMask("Enemies", "Ground"); // Allow jumping on enemies and ground
             groundFilter.minNormalAngle = 90f - maxNormalTilt;
             groundFilter.maxNormalAngle = 90f + maxNormalTilt;
         }
@@ -53,7 +53,9 @@ namespace Entity.Utils
         protected virtual void Update()
         {
             input = GetMovementInput();
-            desiredVelocity = new Vector2(maxSpeed * input.x, input.y);
+            desiredVelocity = isAlive
+                ? new Vector2(maxSpeed * input.x, input.y)
+                : Vector2.zero;
         }
 
         private void FixedUpdate()
@@ -76,8 +78,8 @@ namespace Entity.Utils
             // Flip if switched directions (-1 is left, 1 is right)
             transform.localScale = body.velocity.x switch
             {
-                < 0 => new Vector3(-1, 1, 1),
-                > 0 => new Vector3(1, 1, 1),
+                < 0f => new Vector3(-1f, 1f, 1f),
+                > 0f => new Vector3(1f, 1f, 1f),
                 _ => transform.localScale
             };
         }
@@ -91,8 +93,8 @@ namespace Entity.Utils
         {
             return body.velocity.y switch
             {
-                > 0 => risingGravityScale,
-                < 0 => fallingGravityScale,
+                > 0f => risingGravityScale,
+                < 0f => fallingGravityScale,
                 _ => body.gravityScale
             };
         }
@@ -109,7 +111,7 @@ namespace Entity.Utils
         {
             if (hasJumped)
                 return false;
-            if (!onGround || desiredVelocity.y <= 0) 
+            if (!onGround || desiredVelocity.y <= 0f) 
                 return false;
             
             velocity.y = jumpForce;
