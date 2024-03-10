@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7503066144910842030}
   - component: {fileID: 7628748838300631306}
   - component: {fileID: -5930495946563742030}
+  - component: {fileID: 663609960075281490}
   m_Layer: 0
   m_Name: BulletEffect
   m_TagString: Untagged
@@ -106,3 +107,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &663609960075281490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3410863941561349306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e33617f67d2440785cc845975b8139c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectDuration: 1
