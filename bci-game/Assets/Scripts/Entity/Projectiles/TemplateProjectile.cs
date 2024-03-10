@@ -5,14 +5,14 @@ namespace Entity.Projectiles
 {
     public abstract class TemplateProjectile : MonoBehaviour
     {
-        public GameObject impact;
+        [SerializeField] private GameObject impactEffect;
 
         [Header("Projectile Stats")]
-        [SerializeField] private float projectileSpeed = 12f;
-        [SerializeField] private float projectileDamage = 5f;
-        [SerializeField] private float projectileKnockbackForce = 0f;
-        [SerializeField] private bool affectedByGravity = false;
-        [SerializeField] private float gravityScale = 1f;
+        [SerializeField] protected float projectileSpeed = 12f;
+        [SerializeField] protected float projectileDamage = 5f;
+        [SerializeField] protected float projectileKnockbackForce = 0f;
+        [SerializeField] protected bool affectedByGravity = false;
+        [SerializeField] protected float gravityScale = 1f;
         
         [Header("Projectile Life")]
         [SerializeField] private float projectileLifetime = 5f;
@@ -57,13 +57,12 @@ namespace Entity.Projectiles
                 {
                     Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
                     knockbackDirection.y += 0.8f;
-
-                    //impact animation
-                    Instantiate(impact, transform.position, transform.rotation);
-
+                    
                     damageable.Damage(projectileDamage, knockbackDirection.normalized, projectileKnockbackForce);
                 }
 
+                // Impact animation and destroy projectile
+                Instantiate(impactEffect, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
         }

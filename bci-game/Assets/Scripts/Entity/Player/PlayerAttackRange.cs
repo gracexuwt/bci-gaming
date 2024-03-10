@@ -19,6 +19,8 @@ namespace Entity.Player
         [SerializeField] private AudioClip[] rangeAttackSounds;
         [SerializeField, Range(0f, 1f)] private float rangeAttackVolume = 0.8f;
         
+        private static readonly int IsRanged = Animator.StringToHash("isRanged");
+
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -29,21 +31,16 @@ namespace Entity.Player
         {
             if (Input.GetButton("Fire1") && canFire)
             {
-                animator.SetTrigger("isRanged");
-                StartCoroutine(rangedTime());
                 Shoot();
             }
-        }
-
-        IEnumerator rangedTime()
-        {
-            yield return new WaitForSeconds(3f);
         }
 
         private void Shoot()
         {
             soundController.PlaySound(rangeAttackSounds, rangeAttackVolume);
+            animator.SetTrigger(IsRanged);
             Instantiate(rangeProjectile, firePoint.position, transform.localScale.x > 0 ? Quaternion.identity : Quaternion.Euler(0, 180, 0));
+            
             StartCoroutine(AttackCooldown(1f / rangeAttackSpeed));
         }
         
