@@ -8,6 +8,7 @@ namespace Entity.Player
     {
         private Animator animator;
         private CharacterSoundController soundController;
+        
         [SerializeField] private Transform firePoint;
         
         [SerializeField] private GameObject rangeProjectile;
@@ -28,8 +29,15 @@ namespace Entity.Player
         {
             if (Input.GetButton("Fire1") && canFire)
             {
+                animator.SetTrigger("isRanged");
+                StartCoroutine(rangedTime());
                 Shoot();
             }
+        }
+
+        IEnumerator rangedTime()
+        {
+            yield return new WaitForSeconds(3f);
         }
 
         private void Shoot()
