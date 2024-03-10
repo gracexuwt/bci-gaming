@@ -6,6 +6,8 @@ namespace Entity.Collectables
 
     public class Fruit : TemplateFloatingObj
     {
+        [SerializeField] private float healAmount = 20f;
+        
         [Header("Sounds")]
         [SerializeField] private AudioClip[] collectSounds;
         [SerializeField, Range(0f, 1f)] private float collectVolume = 0.8f;
@@ -18,7 +20,7 @@ namespace Entity.Collectables
                 player.GetComponent<CharacterSoundController>().PlaySound(collectSounds, collectVolume);
                 // play anim
                 
-                player.Heal(10);
+                player.Heal(healAmount);
                 EntityUtils.MarkForDeath(gameObject, 0, false);
             }
         }
