@@ -71,7 +71,7 @@ namespace Entity.Enemies.Bandit
 
             IsAlive = false;
             
-            EntityUtils.MarkForDeath(gameObject, Mathf.Max(deathSoundLen, deathAnimLen));
+            EntityUtils.MarkForDeath(gameObject, Mathf.Max(deathSoundLen, deathAnimLen), true);
         }
     }
 }
