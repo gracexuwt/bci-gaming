@@ -1961,12 +1961,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _device: {fileID: 11400000, guid: 428702deec7bc474dba80cf59a9e2898, type: 2}
-  _buttonLogin: {fileID: 0}
+  _buttonLogin: {fileID: 1507334353}
   _buttonGetDevices: {fileID: 0}
   _buttonGetStatus: {fileID: 0}
   _buttonSubscribeCalm: {fileID: 0}
   _buttonSubscribeFocus: {fileID: 0}
-  _buttonSubscribeRawBrainwaves: {fileID: 0}
+  _buttonSubscribeRawBrainwaves: {fileID: 463401713}
   _buttonSubscribeAccelerometer: {fileID: 0}
   _buttonSubscribeKinesis: {fileID: 0}
   _textKinesisProbability: {fileID: 0}

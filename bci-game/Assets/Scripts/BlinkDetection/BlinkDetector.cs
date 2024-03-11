@@ -9,6 +9,7 @@ namespace Notion.Unity.Example
 {
     public class BlinkDetector : MonoBehaviour
     {
+        static public bool calibrationComplete = false;
         private decimal threshold;
         private decimal meanValue;
         private decimal maxValue;
@@ -36,6 +37,7 @@ namespace Notion.Unity.Example
 
             Debug.Log(meanValue);
             Debug.Log(threshold);
+            calibrationComplete = true;
         }
 
         public void DetectBlink(decimal[] rawData)
