@@ -32,25 +32,26 @@ namespace Entity.Player
         {
             if (Input.GetButton("Fire1") && canFire)
             {
-                Shoot();
+                StartCoroutine(Shoot());
             }
         }
-
-        private void Shoot()
-        {
-            soundController.PlaySound(rangeAttackSounds, rangeAttackVolume);
-            animator.SetTrigger(IsRanged);
-
-            canFire = false;
-            StartCoroutine(Attack(1f / rangeAttackSpeed));
-        }
         
-        private IEnumerator Attack(float duration)
+        private IEnumerator Shoot()
         {
+            canFire = false;
+            
+            animator.SetTrigger(IsRanged);
             yield return new WaitForSeconds(animationTime);
-            //shoot after animation finishes playing
+            
+            // shoot after animation finishes playing
+            soundController.PlaySound(rangeAttackSounds, rangeAttackVolume);
             Instantiate(rangeProjectile, firePoint.position, transform.localScale.x > 0 ? Quaternion.identity : Quaternion.Euler(0, 180, 0));
-            //attack cooldown
+            
+            StartCoroutine(AttackCooldown(1f / rangeAttackSpeed));
+        }
+
+        private IEnumerator AttackCooldown(float duration)
+        {
             yield return new WaitForSeconds(duration);
             canFire = true;
         }
