@@ -24,7 +24,7 @@ namespace Entity.Player
         private static readonly int Walking = Animator.StringToHash("IsWalking");
         private static readonly int Jumping = Animator.StringToHash("isJumping");
         private static readonly int Takeoff = Animator.StringToHash("takeoff");
-
+        
         private void Start()
         {
             self = GetComponent<Player>();

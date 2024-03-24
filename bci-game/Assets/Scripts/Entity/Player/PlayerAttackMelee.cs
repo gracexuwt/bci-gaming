@@ -5,11 +5,11 @@ using Entity.Utils;
 
 namespace Entity.Player
 {
-    public class PlayerAttack : MonoBehaviour
+    public class PlayerAttackMelee : MonoBehaviour
     {
         private Animator animator;
         private CharacterSoundController soundController;
-        private Collider2D meleeAttackCollider;
+        [SerializeField] private Collider2D meleeAttackCollider;
         
         [SerializeField] private float meleeAttackDuration = 0.5f;
         [SerializeField] private float damageAmount = 10f;
@@ -25,7 +25,6 @@ namespace Entity.Player
         {
             animator = GetComponent<Animator>();
             soundController = GetComponent<CharacterSoundController>();
-            meleeAttackCollider = transform.GetChild(0).GetComponent<Collider2D>();
         }
 
         private void Start()
@@ -44,7 +43,7 @@ namespace Entity.Player
             }
         }
 
-        // Basic attacks
+        // Melee attack
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.layer == 7) // Enemy layer, can add other checks for layers, tags, specific obj, etc.
