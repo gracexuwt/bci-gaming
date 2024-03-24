@@ -1,21 +1,20 @@
+using UnityEngine;
+using Entity.Interfaces;
+using Entity.Utils;
+
 namespace Entity.Enemies.Bandit
 {
-    using UnityEngine;
-    using Entity.Interfaces;
-    using Entity.Utils;
     using Entity.Player;
     
     public class BanditMovement : CharacterMovementController
     {
+        private Bandit self;
+        
         private IPositionTrackable playerPositionTracker;
         private Vector2 playerPosition;
-
-        private BoxCollider2D attackPoint;
         
         private static readonly int Facing = Animator.StringToHash("Bandit_X");
-        private static readonly int Attack = Animator.StringToHash("BanditAttack");
-        private static readonly int Die = Animator.StringToHash("BanditDead");
-
+        
         private void Reset()
         {
             maxSpeed = 4f;
@@ -25,12 +24,14 @@ namespace Entity.Enemies.Bandit
 
         private void Start()
         {
+            self = GetComponent<Bandit>();
             playerPositionTracker = FindFirstObjectByType<Player>();
-            attackPoint = transform.GetChild(0).GetComponent<BoxCollider2D>();
         }
 
         protected override void Update()
         {
+            if (!self.IsAlive) isAlive = false;
+            
             base.Update();
 
             playerPosition = playerPositionTracker.GetPosition();
@@ -42,12 +43,12 @@ namespace Entity.Enemies.Bandit
         {
             // Sample AI, can call an AI utils function instead
             float distanceToPlayer = Mathf.Abs(playerPosition.x - transform.position.x);
-            if (0.1 < distanceToPlayer && distanceToPlayer < 8f)
+            if (distanceToPlayer is > 0.1f and < 8f)
             {
-                return playerPosition.x < transform.position.x ? new Vector2 (-1f, 0) : new Vector2(1f, 0);
+                return playerPosition.x < transform.position.x ? new Vector2 (-1f, 0f) : new Vector2(1f, 0f);
             }
 
-            return new Vector2(0, 0);
+            return new Vector2(0f, 0f);
         }
     }
 }

@@ -5,6 +5,8 @@ namespace Entity.Player
 
     public class PlayerMovement : CharacterMovementController
     {
+        private Player self;
+        
         // [Header("Movement Buffers")]
         // [SerializeField, Range(0, 10)] private int preJumpBuffer = 3;
         // [SerializeField, Range(0, 10)] private int postJumpBuffer = 3;
@@ -22,14 +24,17 @@ namespace Entity.Player
         private static readonly int Walking = Animator.StringToHash("IsWalking");
         private static readonly int Jumping = Animator.StringToHash("isJumping");
         private static readonly int Takeoff = Animator.StringToHash("takeoff");
-
+        
         private void Start()
         {
+            self = GetComponent<Player>();
             animator.SetFloat(Facing, 1);
         }
 
         protected override void Update()
         {
+            if (!self.IsAlive) isAlive = false;
+            
             base.Update();
             
             // Animations and sound
