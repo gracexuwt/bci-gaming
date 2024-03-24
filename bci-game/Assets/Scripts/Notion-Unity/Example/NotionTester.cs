@@ -37,8 +37,13 @@ namespace Notion.Unity.Example
         [SerializeField]
         Text _textKinesisProbability;
 
+        public GameObject StartCalibration;
+        public GameObject FinishCalibration;
+
         FirebaseController _controller;
         Notion _notion;
+
+
 
         private void OnEnable()
         {
@@ -144,7 +149,9 @@ namespace Notion.Unity.Example
         public void SubscribeBrainwaves()
         {
             if (!_notion.IsLoggedIn) return;
-            _notion.Subscribe(new BrainwavesRawHandler());
+            BrainwavesRawHandler BrainwavesRawHandler = new BrainwavesRawHandler();
+            _notion.Subscribe(BrainwavesRawHandler);
+            BrainwavesRawHandler.setModals(StartCalibration, FinishCalibration);
             Debug.Log("Subscribed to raw brainwaves");
         }
 

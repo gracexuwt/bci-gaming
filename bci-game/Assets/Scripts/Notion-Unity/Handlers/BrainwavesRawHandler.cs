@@ -14,12 +14,22 @@ namespace Notion.Unity.Example
         List<decimal> epochCalibration = new List<decimal>();
         int CALIBRATIONTIME = 100;
 
+        public GameObject StartCalibration;
+        public GameObject FinishCalibration;
+
         private readonly StringBuilder _builder;
 
         public BrainwavesRawHandler()
         {
             _builder = new StringBuilder();
         } 
+
+        public void setModals(GameObject startCalibration, GameObject finishCalibration) 
+        {
+            StartCalibration = startCalibration;
+            FinishCalibration = finishCalibration;
+        }
+
 
         public void Handle(string metricData)
         {
@@ -53,6 +63,8 @@ namespace Notion.Unity.Example
                 Debug.Log("Calibrating");
                 count = count + 1;
                 blinkDetector.Calibrate(epochCalibration);
+                StartCalibration.SetActive(false);
+                FinishCalibration.SetActive(true);
             }
             else if (count > CALIBRATIONTIME)
             {

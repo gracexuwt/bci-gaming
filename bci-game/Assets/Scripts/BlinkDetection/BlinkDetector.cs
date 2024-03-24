@@ -37,7 +37,7 @@ namespace Notion.Unity.Example
 
             Debug.Log(meanValue);
             Debug.Log(threshold);
-            calibrationComplete = true;
+
         }
 
         public void DetectBlink(decimal[] rawData)
