@@ -39,11 +39,10 @@ namespace Notion.Unity.Example
 
         public GameObject StartCalibration;
         public GameObject FinishCalibration;
+        public GameObject Player;
 
         FirebaseController _controller;
         Notion _notion;
-
-
 
         private void OnEnable()
         {
@@ -151,7 +150,7 @@ namespace Notion.Unity.Example
             if (!_notion.IsLoggedIn) return;
             BrainwavesRawHandler BrainwavesRawHandler = new BrainwavesRawHandler();
             _notion.Subscribe(BrainwavesRawHandler);
-            BrainwavesRawHandler.setModals(StartCalibration, FinishCalibration);
+            BrainwavesRawHandler.setModals(StartCalibration, FinishCalibration, Player);
             Debug.Log("Subscribed to raw brainwaves");
         }
 

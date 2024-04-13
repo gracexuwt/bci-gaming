@@ -16,6 +16,7 @@ namespace Notion.Unity.Example
 
         public GameObject StartCalibration;
         public GameObject FinishCalibration;
+        public GameObject Player;
 
         private readonly StringBuilder _builder;
 
@@ -24,10 +25,11 @@ namespace Notion.Unity.Example
             _builder = new StringBuilder();
         } 
 
-        public void setModals(GameObject startCalibration, GameObject finishCalibration) 
+        public void setModals(GameObject startCalibration, GameObject finishCalibration, GameObject Player) 
         {
             StartCalibration = startCalibration;
             FinishCalibration = finishCalibration;
+            Player = Player;
         }
 
 
@@ -69,7 +71,7 @@ namespace Notion.Unity.Example
             else if (count > CALIBRATIONTIME)
             {
                 Debug.Log("Calibration finished - start blinking");
-                blinkDetector.DetectBlink(epoch.Data[0]);
+                blinkDetector.DetectBlink(epoch.Data[0], Player);
             }
         }
     }

@@ -40,17 +40,17 @@ namespace Notion.Unity.Example
 
         }
 
-        public void DetectBlink(decimal[] rawData)
+        public void DetectBlink(decimal[] rawData, GameObject Player)
         {
             foreach (var value in rawData)
             {
                 decimal squaredDifference = (decimal)Math.Pow((double)(value - meanValue), 2.0);
 
-
                 // Debug.Log("Thershold" + squaredDifference);
                 if (squaredDifference >= threshold)
                 {
-                    Debug.Log("Blink Detected!");
+                    // Player.GetComponent<PlayerAttackMelee>();
+                    
                     return; // If you only want to detect one blink in the current data
                 }
         }
