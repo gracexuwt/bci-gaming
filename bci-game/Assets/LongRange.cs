@@ -7,7 +7,7 @@ public class LongRange : Character
     public int attackDamage = 10;
     public float attackCooldown = 2f;
     public Transform frontCheck;
-    public LayerMask playerLayer;
+    public LayerMask layer;
     public Transform playerTransform;
 
     private bool canAttack = true;
@@ -15,11 +15,12 @@ public class LongRange : Character
 
     private void Awake()
     {
-        playerLayer = LayerMask.GetMask("Player");
+        layer = LayerMask.GetMask("Player");
     }
 
     private void Update()
     {
+        //cowboy enemy
         if (canAttack)
         {
             if (IsPlayerInAttackRange())
