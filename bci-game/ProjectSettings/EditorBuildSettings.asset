@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/BCI.unity
     guid: aaa1fd9a9ab5e48e9ad219a650ba87fa
   - enabled: 1
+    path: Assets/Scenes/Demos/VideoDemo.unity
+    guid: 3a1a01745941a4e5dab14aa77515f8e7
+  - enabled: 0
     path: Assets/Scenes/Demos/Player Long Range.unity
     guid: 1db3649bf701a724a8298a27f4e4066e
   m_configObjects: {}
