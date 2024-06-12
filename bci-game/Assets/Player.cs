@@ -11,6 +11,7 @@ public class Player : Character
     public float attackCooldown = 1f; 
     public Transform frontCheck; 
     private bool canAttack = true; 
+    private bool pressedJump = false;
 
     public override float[] GetInput() {
         float hInput = Input.GetAxis("Horizontal");
@@ -24,6 +25,11 @@ public class Player : Character
                 PerformAttack();
             }
         }
+
+        // On jump, prevent more jumps until player lets go of button
+        if (vInput != 0 && !pressedJump) pressedJump = true;
+        else if (vInput != 0 && pressedJump) vInput = 0;
+        else if (vInput == 0 && pressedJump) pressedJump = false;
 
         return new float[] {hInput, vInput};
     }
