@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZGCrVs5Cjhwk8Qcne41kl2fJ7rDVzahx+9qamoIZruLEmhT3eCdpCIAhX2J6lShawnB13rg6N/UL0bOEC/MvsA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\yaxin\\OneDrive\\Documents\\WATOLINK-bci-gaming\\bci-gaming\\blinking-integation\\bci-gaming.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\yaxin\\.nuget\\packages\\brainflow\\5.10.1\\brainflow.5.10.1.nupkg.sha512"
+  ],
+  "logs": []
+}

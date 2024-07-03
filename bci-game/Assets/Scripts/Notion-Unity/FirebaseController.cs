@@ -43,11 +43,11 @@ namespace Notion.Unity
 
         public async Task<FirebaseUser> Login(Device credentials)
         {
-            AuthResult authResult = await NotionAuth.SignInWithEmailAndPasswordAsync(credentials.Email, credentials.Password);
+            SignInResult signInResult = await NotionAuth.SignInWithEmailAndPasswordAsync(credentials.Email, credentials.Password);
 
-            if (authResult != null)
+            if (signInResult != null && signInResult.User != null)
             {
-                return authResult.User;
+                return signInResult.User;
             }
             else
             {
@@ -69,5 +69,11 @@ namespace Notion.Unity
             NotionApp = null;
             App = null;
         }
+    }
+
+    public class Device
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }
