@@ -138,7 +138,7 @@ MonoBehaviour:
   projectileSpeed: 15
   projectileDamage: 5
   projectileKnockbackForce: 0
-  affectedByGravity: 1
+  affectedByGravity: 0
   gravityScale: 0.2
   projectileLifetime: 5
   projectileCollisionMask:
