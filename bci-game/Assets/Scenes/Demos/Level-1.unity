@@ -545,7 +545,7 @@ SpriteRenderer:
   m_Size: {x: 1.14, y: 1.15}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &197621563
@@ -884,6 +884,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 60fa1b05e4ac42d4f8a58b57215ebecd, type: 3}
   footstepVolume: 0.8
   jumpVolume: 0.8
+  canJump: 1
 --- !u!114 &226335637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,6 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d601afcdabaf446981a3de771f07dd55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleeAttackCollider: {fileID: 1180629915}
   meleeAttackDuration: 0.5
   damageAmount: 10
   knockbackForce: 15
@@ -1342,7 +1344,7 @@ SpriteRenderer:
   m_Size: {x: 1.09, y: 3.03}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &464527894
@@ -1475,7 +1477,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &681098730
@@ -2288,7 +2290,7 @@ SpriteRenderer:
   m_Size: {x: 2.62, y: 1.81}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1163897901
@@ -2580,7 +2582,7 @@ SpriteRenderer:
   m_Size: {x: 1.22, y: 0.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1354524534
@@ -2739,7 +2741,7 @@ SpriteRenderer:
   m_Size: {x: 0.84, y: 0.73}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1564566803
@@ -3363,6 +3365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatHeight: 0.3
   floatSpeed: 1
+  healAmount: 20
   collectSounds:
   - {fileID: 8300000, guid: 3caa681b4c071fc4f81fcc394312fc45, type: 3}
   collectVolume: 0.8
@@ -3600,7 +3603,7 @@ SpriteRenderer:
   m_Size: {x: 0.96, y: 0.89}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1699193704
@@ -3983,7 +3986,7 @@ SpriteRenderer:
   m_Size: {x: 1.06, y: 0.79}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1956825320
@@ -4208,7 +4211,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1964077839
@@ -4277,7 +4280,7 @@ SpriteRenderer:
   m_Size: {x: 2.62, y: 1.81}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1964077841
@@ -4361,7 +4364,7 @@ SpriteRenderer:
   m_Size: {x: 7.69, y: 6.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1986786357
@@ -4618,6 +4621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6300f4037f4fa8645a038a2455aea134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isYConstant: 0
   xOffset: 0
   yOffset: 0
   zOffset: -10
@@ -4964,7 +4968,7 @@ SpriteRenderer:
   m_Size: {x: 2.62, y: 1.81}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2143440518
