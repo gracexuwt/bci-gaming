@@ -10,6 +10,9 @@ namespace DialogueSystem
         private TextMeshProUGUI dialogueBox;
         [SerializeField] private string text;
         [SerializeField] private AudioClip sound;
+        [SerializeField] private GameObject image;
+        [SerializeField] private bool isFirst = false;
+        [SerializeField] private float waitTime = 0f; //used when isFirst is set to true
 
         private void Awake()
         {
@@ -19,7 +22,7 @@ namespace DialogueSystem
 
         private void Start()
         {
-            StartCoroutine(showDialogue(text, dialogueBox, sound));
+            StartCoroutine(showDialogue(text, dialogueBox, sound, image, isFirst, waitTime));
         }
     }
 }

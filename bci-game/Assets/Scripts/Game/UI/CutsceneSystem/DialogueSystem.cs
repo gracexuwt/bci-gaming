@@ -19,8 +19,14 @@ namespace DialogueSystem
         *        dialoguebox: TextMeshPro UI
         *        sound: to be played over dialogue
         */
-        protected IEnumerator showDialogue(string input, TextMeshProUGUI dialogueBox, AudioClip sound) 
+        protected IEnumerator showDialogue(string input, TextMeshProUGUI dialogueBox, AudioClip sound, GameObject image, bool isFirst, float waitTime) 
         {
+            if(isFirst)
+            {
+                yield return new WaitForSeconds(waitTime); //Delay between sequences or transition animation
+                image.SetActive(true);
+            }
+
             for(int i=0; i<input.Length; i++) 
             {
                 dialogueBox.text += input[i];

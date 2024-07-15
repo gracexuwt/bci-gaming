@@ -6,6 +6,9 @@ namespace DialogueSystem
 {
     public class DialogueController : MonoBehaviour
     {
+        [SerializeField] private GameObject image;
+        private bool finished = false;
+
         private void Awake()
         {
             StartCoroutine(dialogueSequence());
@@ -21,6 +24,8 @@ namespace DialogueSystem
             }
             //Close dialogue box
             gameObject.SetActive(false);
+            image.SetActive(false);
+            finished = true;
         }
 
         private void Deactivate()
@@ -29,6 +34,11 @@ namespace DialogueSystem
             {
                 transform.GetChild(i).gameObject.SetActive(false);
             }
+        }
+
+        public bool IsFinished()
+        {
+            return finished;
         }
     }
 }
