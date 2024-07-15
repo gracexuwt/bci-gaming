@@ -839,7 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: WHAT, WHAT IS HAPPENING??
+  text: W-WHAT, WHAT IS HAPPENING??
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
   image: {fileID: 765618205}
   isFirst: 1
@@ -2024,6 +2024,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2900631552572088652, guid: 3cf05f9e263179b44af7747e43ce002f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3077809935055833057, guid: 3cf05f9e263179b44af7747e43ce002f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4325,7 +4329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: These people have long died centureis ago, huh?
+  text: These people have long died centuries ago, huh?
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
   image: {fileID: 499940447}
   isFirst: 0
@@ -7997,9 +8001,9 @@ Canvas:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 399492678}
   - {fileID: 1760716982}
   - {fileID: 1078170850}
   - {fileID: 207298690}
   - {fileID: 374974695}
-  - {fileID: 399492678}
   - {fileID: 1119905737}
