@@ -4482,7 +4482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: '*Gunshots nearby*'
-  sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  sound: {fileID: 8300000, guid: 87d8d48b6d1dd4b49b78154932cca478, type: 3}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -7995,7 +7995,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
