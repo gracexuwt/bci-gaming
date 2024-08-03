@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: This might be the longest hour of my life...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 1
   waitTime: 7.5
@@ -325,8 +326,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: I could fire the gun by just blinking?! That is oddly convenient!
+  text: I can fire this gun by just blinking?! That's oddly convenient!
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -560,7 +562,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Before I could react,\nI was pulled \ninto the force of time"
+  m_text: "Before I could react,\nI was pulled \ninto a vortex of time"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83669ab2ccbc948819d04d0e90a2eef2, type: 2}
   m_sharedMaterial: {fileID: 2453044653339963667, guid: 83669ab2ccbc948819d04d0e90a2eef2, type: 2}
@@ -687,8 +689,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: The item revealed within is a simple golden pocketwatch.
+  text: Inside the box was a golden pocket watch.
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 1
   waitTime: 3
@@ -839,8 +842,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: W-WHAT, WHAT IS HAPPENING??
+  text: W-WHAT, WHAT'S GOING ON?!
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 1
   waitTime: 5
@@ -991,8 +995,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: What could it be?
+  text: What could that be?
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -1175,8 +1180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: The best adventures start with a little boredom...
+  text: Sometimes the best adventures start with a little boredom...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 1
   waitTime: 1.5
@@ -1424,9 +1430,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Why is something like this lying around here? I thought, as I pried the chest
-    open. It was unlocked..
+  text: Why's something like this lying around here? Looks like it's unlocked...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -1577,8 +1583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: ...This is a family heirloom? The Lowbe family? Never heard of them...
+  text: ...A family heirloom? The Lowbe family? I've never heard of them.
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 1
   waitTime: 10
@@ -1729,9 +1736,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Damn it, I need to leave this place! So I just need to find the Lowbe dude
-    and return the pocketwatch? LET'S GO
+  text: Damn it, I need to leave this place! So I gotta find the Lowbe dude and return
+    the pocketwatch? LET'S GO!
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -1882,8 +1890,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Where am I? Am I transported to a desert?
+  text: Where am I? A desert?
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -2199,7 +2208,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2345,8 +2354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Then, I saw a glimmer among the bushes.
+  text: From the corner of my eye, I saw a glimmer in the bushes.
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 1
   waitTime: 5
@@ -2499,6 +2509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: There's a handwritten letter underneath the lid. Let's see...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 0
   waitTime: 5
@@ -2726,6 +2737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: What should I do?!
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 0
   waitTime: 5
@@ -3144,9 +3156,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Everything around me blurred...
+  m_text: 'Everything around me was blurry...
 
-    Where am I being dragged towards?'
+    Where is this taking me?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83669ab2ccbc948819d04d0e90a2eef2, type: 2}
   m_sharedMaterial: {fileID: 2453044653339963667, guid: 83669ab2ccbc948819d04d0e90a2eef2, type: 2}
@@ -3280,10 +3292,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'It felt like an eternity, but was only an instant.
-
-    When everything
-    finally stopped, i found myself in a completely different time....'
+  m_text: "I was floating for what felt like an eternity.\nWhen everything finally
+    stopped, \nI found myself in a completely different time period...."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83669ab2ccbc948819d04d0e90a2eef2, type: 2}
   m_sharedMaterial: {fileID: 2453044653339963667, guid: 83669ab2ccbc948819d04d0e90a2eef2, type: 2}
@@ -3486,8 +3496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Seems quite antique, from hundreds of years ago. Looks like it costs a fortune!
+  text: Seems quite antique, maybe hundreds of years old. Looks like it costs a fortune!
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 0
   waitTime: 0
@@ -3673,8 +3684,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: 'Sometimes I gaze out of the window and wonder - '
+  text: In times like this, I gaze out the window and wonder...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -3918,6 +3930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: What does it mean by "time traveler?"
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 10
@@ -4329,8 +4342,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: These people have long died centuries ago, huh?
+  text: They must have died centuries ago...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 10
@@ -4482,7 +4496,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: '*Gunshots nearby*'
-  sound: {fileID: 8300000, guid: 87d8d48b6d1dd4b49b78154932cca478, type: 3}
+  sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 8300000, guid: 87d8d48b6d1dd4b49b78154932cca478, type: 3}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -4785,6 +4800,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: Wait...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 0
   waitTime: 5
@@ -5082,7 +5098,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.00082397, y: -0.00066376}
-  m_SizeDelta: {x: 897.33, y: 437.33}
+  m_SizeDelta: {x: 10000, y: 10000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135363152
 MonoBehaviour:
@@ -5172,8 +5188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: It's......melting?
+  text: It's......melting??
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 1
   waitTime: 2
@@ -5324,8 +5341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: '- if I could go on a journey somewhere? Far, far away...'
+  text: ...if I could go on a journey somewhere far, far away.
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -5476,8 +5494,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: I felt something heavy in my pocket. A handgun randomly appeared.
+  text: I feel something heavy in my pocket... I reached in and found... A handgun?!
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -5703,8 +5722,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: As a blinked in confusion, the gun fires.
+  text: I blinked in confusion, and the gun fired.
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -6021,8 +6041,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Head feels dizzy...
+  text: My head feels dizzy...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 0
@@ -6173,8 +6194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: ...
+  text: Ugh...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 1
   waitTime: 18
@@ -6673,8 +6695,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: A wooden box?
+  text: It's a wooden box.
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 1
   waitTime: 5
@@ -7159,8 +7182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: I'm not supposed to touch this... Maybe I should put it back...
+  text: I shouldn't touch this... I'll put it back.
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 499940447}
   isFirst: 0
   waitTime: 10
@@ -7491,8 +7515,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: The pocketwatch is shaking, what in hell is going on?!
+  text: The pocket watch is shaking! What the hell is going on?!
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 0
   waitTime: 5
@@ -7643,8 +7668,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8b9dded81b7c7c4d83cd0d355b7f02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: I have a bad feeling...
+  text: I have a bad feeling about this...
   sound: {fileID: 8300000, guid: 8c8f1d2e863ab2247806cc8e33da0f48, type: 3}
+  introsound: {fileID: 0}
   image: {fileID: 765618205}
   isFirst: 0
   waitTime: 2

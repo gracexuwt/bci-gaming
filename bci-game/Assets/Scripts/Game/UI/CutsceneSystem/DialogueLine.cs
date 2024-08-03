@@ -10,6 +10,7 @@ namespace DialogueSystem
         private TextMeshProUGUI dialogueBox;
         [SerializeField] private string text;
         [SerializeField] private AudioClip sound;
+        [SerializeField] private AudioClip introsound;
         [SerializeField] private GameObject image;
         [SerializeField] private bool isFirst = false;
         [SerializeField] private float waitTime = 0f; //used when isFirst is set to true
@@ -22,6 +23,7 @@ namespace DialogueSystem
 
         private void Start()
         {
+            if (introsound != null) DialogueSoundController.instance.playSound(introsound);
             StartCoroutine(showDialogue(text, dialogueBox, sound, image, isFirst, waitTime));
         }
     }
