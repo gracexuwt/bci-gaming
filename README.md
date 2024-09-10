@@ -2,6 +2,8 @@
 
 BCI Gaming Team is developing a 2D platformer game that relies on EEG input to control character movement and actions.
 
+[Video Demo](https://www.youtube.com/watch?v=bZJMjM7YEM4&ab_channel=GraceXu)
+
 # Getting started
 
 Install the required python packages for this project.
